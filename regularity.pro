@@ -2,7 +2,11 @@ TEMPLATE = app
 
 QT += qml quick widgets
 
-SOURCES += main.cpp
+SOURCES += main.cpp \
+    client.cpp \
+    order.cpp \
+    worker.cpp \
+    factory.cpp
 
 RESOURCES += qml.qrc
 
@@ -11,3 +15,9 @@ QML_IMPORT_PATH =
 
 # Default rules for deployment.
 include(deployment.pri)
+
+HEADERS += \
+    client.h \
+    order.h \
+    worker.h \
+    factory.h
