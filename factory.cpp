@@ -63,13 +63,9 @@ bool Factory::buy_part(Part part, Store store)
     }
 }
 
-QString Factory::add_money() {
-    money_ += 100;
-    qDebug() << "money added";
-    QString str;
-    str.setNum(money_);
-    qDebug() << str;
-    return str;
+void Factory::add_money(size_t additional_money) {
+    money_ += additional_money;
+    emit this->moneyChanged(money_);
 }
 
 void Factory::set_money(std::size_t money)
