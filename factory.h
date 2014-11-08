@@ -7,6 +7,7 @@
 
 #include <QQuickItem>
 #include <QtQuick>
+#include <QString>
 #include <vector>
 #include <map>
 #include <memory>
@@ -55,10 +56,9 @@ public:
 
 
 public slots:
-    Q_INVOKABLE void add_money();
+    Q_INVOKABLE QString add_money();
 
 signals:
-    void moneyChanged(std::size_t);
 
 private:
     std::vector<Worker*>        workers_;
