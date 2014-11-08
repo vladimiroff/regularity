@@ -1,4 +1,5 @@
 TEMPLATE = app
+CONFIG += c++11
 
 QT += qml quick widgets
 
@@ -6,7 +7,8 @@ SOURCES += main.cpp \
     client.cpp \
     order.cpp \
     worker.cpp \
-    factory.cpp
+    factory.cpp \
+    storage.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,4 +22,5 @@ HEADERS += \
     client.h \
     order.h \
     worker.h \
-    factory.h
+    factory.h \
+    storage.h
