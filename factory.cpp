@@ -48,8 +48,14 @@ bool Factory::buy_part(Part part, Store store) {
     }
 }
 
-void Factory::add_money(std::size_t money) {
-    money_ += money;
+void Factory::add_money() {
+    money_ += 100;
+    qDebug() << "money added";
+    emit this->moneyChanged(money_);
+}
+
+std::size_t Factory::get_money() {
+    return money_;
 }
 
 void Factory::rating_increase(float increase)
@@ -73,4 +79,10 @@ void Factory::create_order(std::vector<std::string> words, Client client, std::s
                   std::string solution = "") {
     Order new_order(words, SENT, price, experience, client, solution);
     orders_.push_back(new_order);
+}
+
+Factory::~Factory() {
+    for (Worker* worker : workers_) {
+        delete worker;
+    }
 }

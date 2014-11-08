@@ -34,6 +34,14 @@ ApplicationWindow {
                 anchors.left: parent.left
 
                 Rectangle {
+
+                    signal moneyChanged(string value);
+                    signal changeMoney(int value);
+
+                    Component.onCompleted: {
+                        header.moneyChanged.connect(onMoneyChanged)
+                    }
+
                     id: header
                     height: 50
                     color: "#ffffff"
@@ -45,6 +53,20 @@ ApplicationWindow {
                     anchors.rightMargin: 0
                     border.color: "#00ff00"
                     border.width: 2
+
+                    Text {
+                        id: headerText
+                        text: "."
+                    }
+
+                    MouseArea {
+                        anchors.fill: parent
+                        onClicked: add_money()
+                    }
+
+                    function onMoneyChanged(value) {
+                        headerText.text = value
+                    }
                 }
 
                 Rectangle {
@@ -81,7 +103,7 @@ ApplicationWindow {
                             id: gridLayout1
                             columns: 3
                             rows: 3
-                            anchors.left: icon.right
+                            anchors.left: icons.right
                             anchors.leftMargin: 0
                             anchors.bottom: parent.bottom
                             anchors.bottomMargin: 0
