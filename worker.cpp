@@ -32,7 +32,6 @@ bool starting_with(std::vector<std::string> words, std::string expression)
         QString qword(word.c_str());
         if(r.isValid()) {
             if(r.indexIn(qword) < 0) {
-                std::cout << r.indexIn("qword") << std::endl;
                 return false;
             }
         }
@@ -50,21 +49,26 @@ bool Worker::execute_order(Order& order)
         materials.push_back(material.first);
     }
 
-    for(const std::string& begin : beginings) {
-        for(const std::string& material : materials) {
-            std::string start;
-            start = begin + material;
-            if(check_matching(order.get_words(), start)) {
-                order.set_solution(start);
-                return true;
-            }
-            else {
-                if(starting_with(order.get_words(), start)) {
-                    beginings.push_back(start);
+    std::vector<std::string> new_beginings;
+
+    while(beginings.size() > 0) {
+        for(const std::string& begin : beginings) {
+            for(const std::string& material : materials) {
+                std::string start;
+                start = begin + material;
+                if(check_matching(order.get_words(), start)) {
+                    order.set_solution(start);
+                    return true;
+                }
+                else {
+                    if(starting_with(order.get_words(), start)) {
+                        new_beginings.push_back(start);
+                    }
                 }
             }
         }
-        beginings.erase(beginings.begin());
+        beginings = new_beginings;
+        new_beginings = std::vector<std::string>();
     }
 
     return false;
