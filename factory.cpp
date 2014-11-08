@@ -25,4 +25,6 @@ void Factory::remove_order() {
     orders_.pop_back();
 }
 
+void buy_part() {
 
+}
