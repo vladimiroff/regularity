@@ -3,38 +3,51 @@
 #include <vector>
 #include <map>
 
-typedef pair<std::string, std::vector<std::string> > begining;
-
 Worker::Worker(Storage* storage)
 {
    storage_.reset(storage);
 }
 
-bool check_matching(std::vector<std::string>)
+bool check_matching(std::vector<std::string> words, std::regex expression)
 {
+    for(std::string word : words) {
+        if(!std::regex_match(word, expression)) {
+            return false;
+        }
+    }
+    return true;
 }
 
-std::vector<std::string> Worker::execute_order(Order& order)
+bool starting_with(std::vector<std::string> words, std::regex expression)
 {
-    std::vector<begining> beginings;
-    beginings.push_back(begining("^", std::vector<std::string>()));
+    for(std::string word : words) {
+        if(!std::regex_search(word, expression)) {
+            return false;
+        }
+    }
+    return true;
+}
+
+bool Worker::execute_order(Order& order)
+{
+    std::vector<std::string> beginings;
+    beginings.push_back("^");
     std::map<std::string, int> materials_quantity = storage_->materials();
     std::vector<string> materials;
     for(const auto& material: materials_quantity) {
         materials.push_back(material.first);
     }
 
-    for(const begining& begin : beginings) {
-        for(const string& material : materials) {
-            begining start;
-            start.first = begin.first + material;
-            start.second = begin.second;
-            start.second.push_back(material);
-            if(std::regex_match("kiro", std::regex(start.first))) {
-                return start.second;
+    for(const std::string& begin : beginings) {
+        for(const std::string& material : materials) {
+            std::string start;
+            start = begin + material;;
+            if(check_matching(order.get_words(), regex(start))) {
+                order.set_solution(start);
+                return true;
             }
             else {
-                if(std::regex_search("kiro", regex(start.first))) {
+                if(starting_with(order.get_words(), regex(start))) {
                     beginings.push_back(start);
                 }
             }
@@ -42,5 +55,5 @@ std::vector<std::string> Worker::execute_order(Order& order)
         beginings.erase(beginings.begin());
     }
 
-    return std::vector<std::string>();
+    return false;
 }

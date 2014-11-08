@@ -40,7 +40,7 @@ public:
 
     bool level_up();
 
-    void create_order(std::vector<std::string>, Client client, std::size_t, std::size_t, std::vector<std::string>);
+    void create_order(std::vector<std::string>, Client client, std::size_t, std::size_t, string);
     void experience_increase(std::size_t);
 };
 

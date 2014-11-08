@@ -1,7 +1,7 @@
 #include "order.h"
 
 Order::Order(std::vector<std::string> words, Status status, std::size_t experience, std::size_t price, Client client,
-             std::vector<std::string> solution = std::vector<std::string>())
+             std::string solution = "")
 {
     words_ = words;
     status_ = status;
@@ -14,3 +14,8 @@ Order::Order(std::vector<std::string> words, Status status, std::size_t experien
 vector<std::string> Order::get_words() {
     return words_;
 }
+
+void Order::set_solution(std::string solution) {
+    solution_ = solution;
+}
+

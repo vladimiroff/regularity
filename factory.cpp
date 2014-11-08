@@ -70,7 +70,7 @@ bool Factory::level_up() {
 }
 
 void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,
-                  std::vector<std::string> solution = std::vector<std::string>()) {
+                  std::string solution = "") {
     Order new_order(words, SENT, price, experience, client, solution);
     orders_.push_back(new_order);
 }

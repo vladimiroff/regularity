@@ -10,7 +10,7 @@ class Worker
 public:
     Worker(Storage *);
 
-    std::vector<std::string> execute_order(Order&);
+    bool execute_order(Order&);
 
 private:
     std::unique_ptr<Storage> storage_;
