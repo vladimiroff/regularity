@@ -112,7 +112,6 @@ bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
         }
 }
 
-
 void Factory::set_money(std::size_t money)
 {
     money_ = money;
