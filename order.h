@@ -32,8 +32,6 @@ public:
     void set_client(Client client);
     void set_solution(std::string solution);
 
-    void set_solution(std::string);
-
 private:
     std::vector<std::string> words_;
     Status status_;
