@@ -2,6 +2,7 @@ TEMPLATE = app
 CONFIG += c++11
 
 QT += qml quick widgets
+QT += core
 
 SOURCES += main.cpp \
     client.cpp \

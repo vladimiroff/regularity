@@ -2,27 +2,39 @@
 #include <regex>
 #include <vector>
 #include <map>
+#include <QRegExp>
+#include <QString>
+#include <iostream>
 
 Worker::Worker(Storage* storage)
 {
    storage_.reset(storage);
 }
 
-bool check_matching(std::vector<std::string> words, std::regex expression)
+bool check_matching(std::vector<std::string> words, std::string expression)
 {
+    QString qexpression(expression.c_str());
+    QRegExp r(qexpression);
     for(std::string word : words) {
-        if(!std::regex_match(word, expression)) {
+        QString qword(word.c_str());
+        if(!r.exactMatch(qword)) {
             return false;
         }
     }
     return true;
 }
 
-bool starting_with(std::vector<std::string> words, std::regex expression)
+bool starting_with(std::vector<std::string> words, std::string expression)
 {
+    QString qexpression(expression.c_str());
+    QRegExp r(qexpression);
     for(std::string word : words) {
-        if(!std::regex_search(word, expression)) {
-            return false;
+        QString qword(word.c_str());
+        if(r.isValid()) {
+            if(r.indexIn(qword) < 0) {
+                std::cout << r.indexIn("qword") << std::endl;
+                return false;
+            }
         }
     }
     return true;
@@ -41,13 +53,13 @@ bool Worker::execute_order(Order& order)
     for(const std::string& begin : beginings) {
         for(const std::string& material : materials) {
             std::string start;
-            start = begin + material;;
-            if(check_matching(order.get_words(), regex(start))) {
+            start = begin + material;
+            if(check_matching(order.get_words(), start)) {
                 order.set_solution(start);
                 return true;
             }
             else {
-                if(starting_with(order.get_words(), regex(start))) {
+                if(starting_with(order.get_words(), start)) {
                     beginings.push_back(start);
                 }
             }
