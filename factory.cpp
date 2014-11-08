@@ -1,11 +1,12 @@
 #include "factory.h"
+#include "storage.h"
 
-Factory::Factory(Storage storage, std::size_t money, float rating, std::size_t level,
+Factory::Factory(Storage* storage, std::size_t money, float rating, std::size_t level,
                  std::vector<Worker> workers = std::vector<Worker>(),std::vector<Order> orders = std::vector<Order>())
 {
        workers_ = workers;
        orders_ = orders;
-       storage_ = storage;
+       storage_.reset(storage);
        money_ = money;
        rating_ = rating;
        level_ = level;

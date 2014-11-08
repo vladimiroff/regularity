@@ -6,21 +6,22 @@
 #include "storage.h"
 #include <vector>
 #include <map>
+#include <memory>
 
-
-
+// index of vector is level and map is parts in store for this level
+typedef std::vector<std::map<std::string, std::size_t>> Store;
 
 class Factory
 {
     std::vector<Worker>      workers_;
     std::vector<Order>       orders_;
-    Storage                  storage_;
+    std::unique_ptr<Storage> storage_;
     std::size_t              money_;
     float                    rating_;
     std::size_t              level_;
 
 public:
-    Factory(Storage, std::size_t, float, std::size_t, std::vector<Worker>, std::vector<Order>);
+    Factory(Storage *, std::size_t, float, std::size_t, std::vector<Worker>, std::vector<Order>);
 
     void add_worker(Worker);
     void remove_worker();
