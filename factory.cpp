@@ -71,11 +71,6 @@ QString Factory::add_money() {
     return str;
 }
 
-std::size_t Factory::get_money()
-{
-    return money_;
-}
-
 void Factory::set_money(std::size_t money)
 {
     money_ = money;
