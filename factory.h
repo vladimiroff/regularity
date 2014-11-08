@@ -20,7 +20,7 @@ class Factory
     std::size_t              level_;
 
 public:
-    Factory(std::vector<Worker>, std::vector<Order>, Storage, std::size_t, float, std::size_t);
+    Factory(Storage, std::size_t, float, std::size_t, std::vector<Worker>, std::vector<Order>);
 
     void add_worker(Worker);
     void remove_worker();

@@ -47,11 +47,11 @@ void Client::set_level(const size_t level)
 }
 
 
-void Client::generate_order(Factory facory_for_order)
+/*void Client::generate_order(Factory facory_for_order)
 {
     //need to set random words in vector not 1st word !!!!!
     size_t order_level = level_ * EXP_FOR_ORDER;
     size_t order_money = level_ * MONEY_FOR_ORDER;
-    Order order_to_push(words[1], "SENT", order_level, order_money, *this);
-    facory_for_order.add_order(order_to_push);
-}
+    Order order_to_push(words_, SENT, order_level, order_money, *this);
+    //facory_for_order.add_order(order_to_push);
+}*/
