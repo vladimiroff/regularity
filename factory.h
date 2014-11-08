@@ -12,15 +12,15 @@ using namespace std;
 
 class Factory
 {
-    vector<Worker>      workers;
-    vector<Order>       orders;
-    Storage             storage;
-    double              money;
-    float               rating;
-    int                 level;
+    vector<Worker>      workers_;
+    vector<Order>       orders_;
+    Storage             storage_;
+    size_t              money_;
+    float               rating_;
+    size_t              level_;
 
 public:
-    Factory(vector<Worker>, vector<Order>, Storage, double, int, int);
+    Factory(vector<Worker>, vector<Order>, Storage, size_t, float, size_t);
 
     void add_worker(Worker);
     void remove_worker();
@@ -30,7 +30,7 @@ public:
 
     void buy_part();
 
-    void add_money(double);
+    void add_money(size_t);
 
     void rating_increase(float);
     void rating_decrease(float);
@@ -38,12 +38,6 @@ public:
     void level_up();
 };
 
-Factory::Factory(vector<Worker> _workers = vector<Worker>(),vector<Order> _orders = vector<Order>(),
-                 Storage _storage, double _money, int _rating, int _level) {
-       workers = _workers;
-       orders = _orders;
-       money = _money;
-       rating = _rating;
-       level = _level;
-}
+
+
 #endif // FACTORY_H
