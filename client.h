@@ -21,8 +21,6 @@ public:
     void set_words(const vector<string> words);
     void set_level(const size_t level);
 
-    //void generate_order(Factory facory_for_order);
-
 private:
     size_t patience_;
     vector<string> words_;
