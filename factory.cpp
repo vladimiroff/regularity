@@ -1,7 +1,7 @@
 #include "factory.h"
 
-Factory::Factory(vector<Worker> workers = vector<Worker>(),vector<Order> _rders = vector<Order>(),
-                 Storage storage, double money, int rating, int level) {
+Factory::Factory(std::vector<Worker> workers = std::vector<Worker>(),std::vector<Order> _rders = std::vector<Order>(),
+                 Storage storage, std::size_t money, float rating, std::size_t level) {
        workers_ = workers;
        orders_ = _rders;
        money_ = money;

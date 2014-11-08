@@ -8,19 +8,19 @@
 #include <map>
 
 
-using namespace std;
+
 
 class Factory
 {
-    vector<Worker>      workers_;
-    vector<Order>       orders_;
-    Storage             storage_;
-    size_t              money_;
-    float               rating_;
-    size_t              level_;
+    std::vector<Worker>      workers_;
+    std::vector<Order>       orders_;
+    Storage                  storage_;
+    std::size_t              money_;
+    float                    rating_;
+    std::size_t              level_;
 
 public:
-    Factory(vector<Worker>, vector<Order>, Storage, size_t, float, size_t);
+    Factory(std::vector<Worker>, std::vector<Order>, Storage, std::size_t, float, std::size_t);
 
     void add_worker(Worker);
     void remove_worker();
@@ -30,7 +30,7 @@ public:
 
     void buy_part();
 
-    void add_money(size_t);
+    void add_money(std::size_t);
 
     void rating_increase(float);
     void rating_decrease(float);
