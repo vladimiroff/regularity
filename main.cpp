@@ -31,22 +31,15 @@ std::vector<std::string> generate_order_words(Client client)
 int main()
 {
     std::map<std::string,int> first;
-    first["\\s"] = 5;
-    first["\\d"] = 5;
     first["\\w"] = 5;
+    first["\\d"] = 5;
+    first["\\w\\w"] = 5;
     vector<std::string> words = {"bam3", "ham3"};
     Client client(20, words, 1);
     Order order(words, SENT, 150, 300, client, "");
-    QRegExp r("^\\w");
-    std::cout << r.indexIn("bam3");
-    if(r.indexIn("uck")) {
-        std::cout << "Qqqqqq" << std::endl;
-    }
-    else {
-        std::cout << "Rrrrr" << std::endl;
-    }
+
     Storage* a = new Storage(first);
     Worker b(a);
-    std::cout << "blqblq" << b.execute_order(order) << "fuck" << std::endl;
+    std::cout << b.execute_order(order) << std::endl;
     return 0;
 }
