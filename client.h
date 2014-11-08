@@ -1,12 +1,6 @@
 #ifndef CLIENT_H
 #define CLIENT_H
 
-class Client
-{
-public:
-    Client();
-};
-
 #include <iostream>
 #include <string>
 #include <vector>
@@ -18,10 +12,7 @@ class Client
 {
 public:
     Client();
-    Client(patience, words, level);
-    ~Client();
-    Client(const Client& other);
-    Client operator=(const Client& other);
+    Client(size_t patience, vector<string> words, size_t level);
 
     size_t get_patience() const;
     vector<string> get_words() const;
@@ -30,9 +21,6 @@ public:
     void set_patience(const size_t patience);
     void set_words(const vector<string> words);
     void set_level(const size_t level);
-
-    void clear();
-    void copy(const Client);
 
     void generate_order(Factory facory_for_order);
 
