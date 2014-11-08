@@ -5,7 +5,7 @@ import QtQuick.Layouts 1.0
 Rectangle {
     id: task_view
     width: 200
-    Layout.minimumWidth: 150
+    Layout.minimumWidth: 200
     color: "lightgreen"
 
     ColumnLayout {

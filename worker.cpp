@@ -10,6 +10,10 @@ Worker::Worker(Storage* storage)
    storage_.reset(storage);
 }
 
+bool check_matching(std::vector<std::string>)
+{
+}
+
 std::vector<std::string> Worker::execute_order(Order& order)
 {
     std::vector<begining> beginings;
