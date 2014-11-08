@@ -1,6 +1,8 @@
 #include <QApplication>
+#include <QQmlContext>
 #include <QQmlApplicationEngine>
 #include "order.h"
+#include "factory.h"
 
 #include <iostream>
 #include "storage.h"
@@ -12,7 +14,6 @@
 
 size_t EXP_FOR_ORDER = 10;
 size_t MONEY_FOR_ORDER = 30;
-
 size_t generate_order_price(Client client)
 {
     return client.get_level() * MONEY_FOR_ORDER;
