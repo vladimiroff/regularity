@@ -12,14 +12,7 @@ class Client
 {
 public:
     Client();
-<<<<<<< Updated upstream
     Client(size_t patience, vector<string> words, size_t level);
-=======
-    Client(size_t patience, vector<string>words, size_t level);
-    ~Client();
-    Client(const Client& other);
-    Client operator=(const Client& other);
->>>>>>> Stashed changes
 
     size_t get_patience() const;
     vector<string> get_words() const;
