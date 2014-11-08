@@ -62,20 +62,16 @@ bool Factory::buy_part(Part part, Store store)
     }
 }
 
-<<<<<<< HEAD
-void Factory::add_money() {
+void Factory::add_money()
+{
     money_ += 100;
     qDebug() << "money added";
     emit this->moneyChanged(money_);
 }
 
-std::size_t Factory::get_money() {
-    return money_;
-=======
-void Factory::add_money(std::size_t money)
+std::size_t Factory::get_money()
 {
-    money_ += money;
->>>>>>> edit factory and order
+    return money_;
 }
 
 void Factory::set_money(std::size_t money)
@@ -111,15 +107,17 @@ void Factory::level_up()
 void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,
                            std::string solution = "")
 {
-
     Order new_order(words, SENT, price, experience, client, solution);
     orders_.push_back(new_order);
 }
 
-Factory::~Factory() {
-    for (Worker* worker : workers_) {
+Factory::~Factory()
+{
+    for (Worker* worker : workers_)
+    {
         delete worker;
     }
+}
 
 // get methods:
 std::vector<Worker*> Factory::get_workers()
