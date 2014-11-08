@@ -1,8 +1,9 @@
 #include "factory.h"
 #include "storage.h"
 
+
 Factory::Factory(Storage* storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
-                 std::size_t level_experience, std::vector<Worker> workers = std::vector<Worker>(),
+                 std::size_t level_experience, std::vector<Worker*> workers = std::vector<Worker*>(),
                  std::vector<Order> orders = std::vector<Order>())
 {
        workers_ = workers;
@@ -15,7 +16,9 @@ Factory::Factory(Storage* storage, std::size_t money, float rating, std::size_t 
        level_experience_ = level_experience;
 }
 
-void Factory::add_worker(Worker worker)
+// TODO create destructor to delete workers
+
+void Factory::add_worker(Worker *worker)
 {
     workers_.push_back(worker);
 }

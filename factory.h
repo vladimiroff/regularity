@@ -13,7 +13,7 @@ typedef std::vector<std::map<std::string, Part>> Store;
 
 class Factory
 {
-    std::vector<Worker>         workers_;
+    std::vector<Worker*>        workers_;
     std::vector<Order>          orders_;
     std::unique_ptr<Storage>    storage_;
     std::size_t                 money_;
@@ -23,9 +23,9 @@ class Factory
     std::size_t                 level_experience_;               //this is xp you need for next level
 
 public:
-    Factory(Storage *, std::size_t, float, std::size_t, std::size_t, std::size_t, std::vector<Worker>, std::vector<Order>);
+    Factory(Storage *, std::size_t, float, std::size_t, std::size_t, std::size_t, std::vector<Worker*>, std::vector<Order>);
 
-    void add_worker(Worker);
+    void add_worker(Worker*);
     void remove_worker();
 
     void add_order(Order);

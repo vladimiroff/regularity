@@ -1,9 +1,6 @@
 #include "client.h"
 #include "order.h"
 
-size_t EXP_FOR_ORDER = 10;
-size_t MONEY_FOR_ORDER = 30;
-
 Client::Client()
 {
     patience_ = 0;
