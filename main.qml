@@ -17,15 +17,14 @@ ApplicationWindow {
         orientation: Qt.Horizontal
         Rectangle {
             id: main_view
-            Layout.minimumWidth: parent.width - 200
+            Layout.minimumWidth: 400
             Layout.preferredWidth: parent.width - 200
             color: "lightblue"
+            anchors.right: parent.right
+            anchors.rightMargin: 200
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 0
             anchors.left: parent.left
-            anchors.leftMargin: 0
             anchors.top: parent.top
-            anchors.topMargin: 0
 
             ColumnLayout {
                 id: columnLayout1
