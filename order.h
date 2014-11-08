@@ -16,9 +16,21 @@ struct Part {
 class Order
 {
 public:
-    Order(std::vector<std::string>, Status, std::size_t, std::size_t, Client, string);
+    Order(std::vector<std::string> words, Status status, std::size_t experience,
+          std::size_t price, Client client, std::string solution);
 
     vector<std::string> get_words();
+    Status get_status();
+    std::size_t get_experience();
+    std::size_t get_price();
+    Client get_client();
+    std::string get_solution();
+
+    void set_status(Status status);
+    void set_experience(std::size_t experience);
+    void set_price(std::size_t price);
+    void set_client(Client client);
+    void set_solution(std::string solution);
 
     void set_solution(std::string);
 

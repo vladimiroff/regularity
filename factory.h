@@ -18,44 +18,57 @@ class Factory : public QQuickItem
 {
     Q_OBJECT
 
-    std::vector<Worker*>        workers_;
-    std::vector<Order>          orders_;
-    std::unique_ptr<Storage>    storage_;
-    std::size_t                 money_;
-    float                       rating_;
-    std::size_t                 level_;
-    std::size_t                 factory_experience_;     //this is our xp
-    std::size_t                 level_experience_;               //this is xp you need for next level
 
 public:
-    Factory(Storage *, std::size_t, float, std::size_t, std::size_t, std::size_t, std::vector<Worker*>, std::vector<Order>);
     virtual ~Factory();
+    Factory(Storage *storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
+            std::size_t level_experience, std::vector<Worker*> workers, std::vector<Order> orders);
 
-    void add_worker(Worker*);
+
+    void add_worker(Worker* new_worker);
     void remove_worker();
-
-    void add_order(Order);
-    void remove_order();
-
+    void set_workers(std::vector<Worker*> workers);      //set_workers using vector
+    void add_order(Order new_order);
+    void set_orders(std::vector<Order> orders);          //set_orders using vector
+    void remove_order(); 
+    void add_money(std::size_t additional_money);
+    void set_money(std::size_t money);                  //set_money
+    void rating_increase(float additional_rating);
+    void rating_decrease(float less_rating);
+    void set_rating(float new_rating);                  //set_rating
+    void create_order(std::vector<std::string> words, Client client, std::size_t experience,
+                      std::size_t price, std::string string);
+    void experience_increase(std::size_t additional_experience);
+    void level_up();
     bool buy_part(Part part, Store store);
 
 
-    void rating_increase(float);
-    void rating_decrease(float);
 
-    bool level_up();
-
-    void create_order(std::vector<std::string>, Client client, std::size_t, std::size_t, string);
-    void experience_increase(std::size_t);
-
-
+    // get methods
+    std::vector<Worker*> get_workers();
+    std::vector<Order> get_orders();
     std::size_t get_money();
+    float get_rating();
+    std::size_t get_level();
+    std::size_t get_factory_experience();
+    std::size_t get_level_experience();
+
 
 public slots:
     Q_INVOKABLE void add_money();
 
 signals:
     void moneyChanged(std::size_t);
+
+private:
+    std::vector<Worker*>        workers_;
+    std::vector<Order>          orders_;
+    std::unique_ptr<Storage>    storage_;
+    std::size_t                 money_;
+    float                       rating_;
+    std::size_t                 level_;
+    std::size_t                 factory_experience_;        //this is our xp
+    std::size_t                 level_experience_;          //this is xp you need for next level
 };
 
 
