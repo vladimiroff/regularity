@@ -1,4 +1,5 @@
 #include "storage.h"
+#include <QDebug>
 
 Storage::Storage(std::map<std::string,int> materials)
 {

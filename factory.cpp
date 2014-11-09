@@ -243,7 +243,10 @@ Order* Factory::get_order_in_progress() {
 }
 
 int Factory::take_order() {
-    Order* order = orders_.begin()->second;
-    order_in_progress_ = order;
-    return orders_.begin()->first;
+    if(orders_.size() > 0) {
+        Order* order = orders_.begin()->second;
+        order_in_progress_ = order;
+        return orders_.begin()->first;
+    }
+    return -1;
 }

@@ -16,7 +16,6 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     signalMapper = new QSignalMapper();
 
-
     //signals
 
     std::map<std::string,int> storageItems;
@@ -90,10 +89,12 @@ void MainWindow::toggleMainViews() {
 
 void MainWindow::onOrderTaken() {
     int id = factory->take_order();
-    factory->remove_order(id);
-    Order* order = factory->get_order_in_progress();
-    QString text(order->get_words()[0].c_str());
-    ui->orderInfo->setText(text);
+    if(id != -1) {
+        factory->remove_order(id);
+        Order* order = factory->get_order_in_progress();
+        QString text(order->get_words()[0].c_str());
+        ui->orderInfo->setText(text);
+    }
 }
 
 void MainWindow::onAddedMaterial(std::string material)
