@@ -10,7 +10,7 @@ public:
     Storage(std::map<std::string,int>);
 
     void add_material(std::string);
-    bool get_marerial(std::string);
+    bool get_material(std::string);
 
     std::map<std::string, int> materials() const;
 
