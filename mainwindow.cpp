@@ -99,7 +99,7 @@ void MainWindow::toggleMainViews() {
     int currentIndex = ui->mainViews->currentIndex();
     if (currentIndex) {
         ui->mainViews->setCurrentIndex(0);
-        ui->toggleMainViewButton->setText("Shop");
+        ui->toggleMainViewButton->setText("Store");
     } else {
         ui->mainViews->setCurrentIndex(1);
         ui->toggleMainViewButton->setText("Workbench");
