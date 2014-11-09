@@ -21,10 +21,11 @@ class Factory : public QQuickItem
 
 public:
     virtual ~Factory();
-    Factory(Storage *storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
-            std::size_t level_experience, size_t current_order_id,
-            std::vector<Worker*> workers, std::map<std::size_t, Order*> orders);
 
+    Factory(Storage *storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
+            std::size_t level_experience, size_t current_order_id = 0,
+            std::vector<Worker*> workers = std::vector<Worker*>(),
+            std::map<std::size_t, Order*> orders = std::map<std::size_t, Order*>());
 
     void add_worker(Worker* new_worker);
     void remove_worker();
