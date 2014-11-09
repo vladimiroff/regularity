@@ -93,6 +93,26 @@ void Factory::levelUp()
 }
 
 
+bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
+{
+        std::size_t price = store[level_][regexp]->price;
+
+        if (store[level_].find(regexp) != store[level_].end() && money_ >= quantity * price )
+        {
+            for(size_t i = 0; i < quantity; i++)
+            {
+                money_ -= price;
+                storage_->add_material(regexp);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+}
+
+
 void Factory::set_money(std::size_t money)
 {
     money_ = money;
@@ -126,7 +146,7 @@ void Factory::experience_increase(std::size_t experience)
 void Factory::level_up()
 {
     level_++;
-    level_experience_ *= 2
+    level_experience_ *= 2;
 }
 
 void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,
