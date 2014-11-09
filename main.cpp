@@ -23,7 +23,7 @@
 #include <unistd.h>
 #include <random>
 
-size_t EXP_FOR_ORDER = 10;
+size_t EXP_FOR_ORDER = 50;
 size_t MONEY_FOR_ORDER = 30;
 
 size_t generate_order_price(Client client)
@@ -62,7 +62,7 @@ void generate_orders(Factory* factory, Client clients[10]) {
 
         factory->create_order(order_words, clients[n], xp, price, "");
 
-        usleep(rand() % 10000000);
+        usleep(2000 + (rand() % 10000000));
     }
 }
 

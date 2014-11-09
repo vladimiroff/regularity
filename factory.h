@@ -71,7 +71,7 @@ signals:
     void orderRemoved(int);
     void moneyChanged(int);
     void ratingChanged(float);
-    void levelUp(std::size_t);
+    void levelChanged(int);
 
 private:
     std::vector<Worker*>            workers_;

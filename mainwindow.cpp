@@ -28,13 +28,13 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
     connect(factory, SIGNAL(orderRemoved(int)), this, SLOT(onOrderRemoved(int)));
     connect(factory, SIGNAL(ratingChanged(float)), this, SLOT(onRatingChanged(float)));
-    connect(factory, SIGNAL(levelUp(std::size_t)), this, SLOT(onLevelUp(std::size_t)));
+    connect(factory, SIGNAL(levelChanged(int)), this, SLOT(onLevelChanged(int)));
     connect(ui->takeOrder, SIGNAL(clicked()), this, SLOT(onOrderTaken()));
     connect(storage, SIGNAL(addedMaterial(std::string)), this, SLOT(onAddedMaterial(std::string)));
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
     connect(shopSignalMapper, SIGNAL(mapped(QString)), this, SLOT(onPartBought(QString)));
-    onLevelUp(1);
+    connect(factory,SIGNAL(levelChanged(int)), this, SLOT(onLevelChanged(int)));
     disableInput();
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -64,7 +64,6 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("[q-t]");
     storage->add_material("[l-s]");
     storage->add_material("[x-z]");
-    qDebug() << "Here";
     store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
             {"[abcdf]", 1}, {"[xyzt]", 1}, {"[qwerty]", 1},
             {"[aeiouy]", 1}, {"[jklmn]", 1}, {"?", 5}, {"|", 5}, {".", 5},
@@ -72,7 +71,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     ui->storageLayout->setContentsMargins(1, 1, 1, 1);
     populateStore();
-
+    onLevelChanged(1);
 }
 
 MainWindow::~MainWindow()
@@ -237,7 +236,6 @@ void MainWindow::onPartBought(QString part)
     storage->add_material(part.toStdString());
 }
 
-void MainWindow::onLevelUp(std::size_t level)
-{
+void MainWindow::onLevelChanged(int level) {
     ui->level->display((int) level);
 }

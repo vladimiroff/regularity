@@ -33,7 +33,6 @@ public slots:
     void onAddedMaterial(std::string);
     void onTookMaterial(QString);
     void onPartBought(QString);
-    void onLevelUp(std::size_t);
 
 private slots:
     void toggleMainViews();
@@ -44,6 +43,7 @@ private slots:
     void onCheck();
     void onRatingChanged(float);
     void populateStore();
+    void onLevelChanged(int);
 };
 
 #endif // MAINWINDOW_H

@@ -96,7 +96,6 @@ std::string Factory::takePart(std::string regexp)
 void Factory::levelUp()
 {
     level_up();
-    emit this->levelUp(get_level());
 }
 
 bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
@@ -127,6 +126,10 @@ void Factory::set_money(std::size_t money)
 void Factory::rating_increase(float increase)
 {
     rating_ += increase;
+    if (rating_ >= 100) {
+      this->level_up();
+      rating_ = 100 - rating_;
+    }
     emit ratingChanged(rating_);
 }
 
@@ -158,8 +161,10 @@ void Factory::experience_increase(std::size_t experience)
 
 void Factory::level_up()
 {
+    emit ratingChanged(100);
     level_++;
     level_experience_ *= 2;
+    emit levelChanged(level_);
 }
 
 void Factory::create_order(std::vector<std::string> words, Client& client, std::size_t price, std::size_t experience,
