@@ -222,9 +222,9 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="finish">
+      <widget class="QPushButton" name="check">
        <property name="enabled">
-        <bool>false</bool>
+        <bool>true</bool>
        </property>
        <property name="sizePolicy">
         <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
@@ -238,7 +238,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Finish</string>
+        <string>Check</string>
        </property>
        <property name="autoDefault">
         <bool>true</bool>

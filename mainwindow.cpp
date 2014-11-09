@@ -31,6 +31,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(storage, SIGNAL(addedMaterial(std::string)), this, SLOT(onAddedMaterial(std::string)));
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
+    connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
 
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -138,3 +139,17 @@ void MainWindow::onTookMaterial(QString material)
     ui->answer->setText(ui->answer->text() + material);
 }
 
+void MainWindow::onCheck() {
+    std::string expression = ui->answer->text().toStdString();
+    Order* order = factory->get_order_in_progress();
+    std::vector<std::string> words = order->get_words();
+    if(factory->validateRegExp(expression, words)) {
+        ui->answer->setText("Great job!");
+        factory->add_money(order->get_price());
+        factory->rating_increase(order->get_experience());
+    }
+    else {
+        ui->answer->setText("You suck at this!");
+        factory->rating_decrease(order->get_experience());
+    }
+}

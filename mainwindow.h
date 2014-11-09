@@ -35,6 +35,7 @@ private slots:
     void onOrderRemoved(int);
     void onOrderCreated(int);
     void onOrderTaken();
+    void onCheck();
 };
 
 #endif // MAINWINDOW_H
