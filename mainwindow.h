@@ -33,6 +33,7 @@ public slots:
     void onAddedMaterial(std::string);
     void onTookMaterial(QString);
     void onPartBought(QString);
+    void onLevelUp(std::size_t);
 
 private slots:
     void toggleMainViews();

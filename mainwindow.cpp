@@ -27,12 +27,14 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
     connect(factory, SIGNAL(orderRemoved(int)), this, SLOT(onOrderRemoved(int)));
+    connect(factory, SIGNAL(ratingChanged(float)), this, SLOT(onRatingChanged(float)));
+    connect(factory, SIGNAL(levelUp(std::size_t)), this, SLOT(onLevelUp(std::size_t)));
     connect(ui->takeOrder, SIGNAL(clicked()), this, SLOT(onOrderTaken()));
     connect(storage, SIGNAL(addedMaterial(std::string)), this, SLOT(onAddedMaterial(std::string)));
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
-    connect(factory, SIGNAL(ratingChanged(float)), this, SLOT(onRatingChanged(float)));
     connect(shopSignalMapper, SIGNAL(mapped(QString)), this, SLOT(onPartBought(QString)));
+    onLevelUp(1);
     disableInput();
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -229,7 +231,13 @@ void MainWindow::populateStore()
     }
 }
 
-void MainWindow::onPartBought(QString part) {
+void MainWindow::onPartBought(QString part)
+{
     factory->buy_part(part.toStdString(), store);
     storage->add_material(part.toStdString());
+}
+
+void MainWindow::onLevelUp(std::size_t level)
+{
+    ui->level->display((int) level);
 }

@@ -96,6 +96,7 @@ std::string Factory::takePart(std::string regexp)
 void Factory::levelUp()
 {
     level_up();
+    emit this->levelUp(get_level());
 }
 
 bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
