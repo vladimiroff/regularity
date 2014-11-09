@@ -30,7 +30,6 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(factory, SIGNAL(orderRemoved(int)), this, SLOT(onOrderRemoved(int)));
     connect(ui->takeOrder, SIGNAL(clicked()), this, SLOT(onOrderTaken()));
     connect(storage, SIGNAL(addedMaterial(std::string)), this, SLOT(onAddedMaterial(std::string)));
-    connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
     connect(factory, SIGNAL(ratingChanged(float)), this, SLOT(onRatingChanged(float)));
