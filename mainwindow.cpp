@@ -12,21 +12,46 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
 
     std::map<std::string,int> storageItems;
-    storageItems["\w"] = 5;
+    storageItems["\\w"] = 10;
     storageItems["[aeoui]"] = 3;
     storageItems[".?"] = 3;
-    storageItems["\d"] = 7;
+    storageItems["\\d"] = 7;
     storageItems["\\"] = 4;
     storageItems["?"] = 2;
     storageItems["a"] = 2;
-    connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
+    storageItems["\\w\\d"] = 5;
     Storage* storage = new Storage(storageItems);
-    Factory* factory = new Factory(storage, 100, 30, 0, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
+    Factory* factory = new Factory(storage, 0, 30, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
+    this->factory = factory;
+
+    //signals
+    connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
+    connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
+    connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
+    connect(factory, SIGNAL(orderRemoved(int)), this, SLOT(onOrderRemoved(int)));
+
+    factory->add_money(100);
 }
 
 MainWindow::~MainWindow()
 {
     delete ui;
+}
+
+Factory* MainWindow::GetFactory() {
+   return this->factory;
+}
+
+void MainWindow::onMoneyChanged(int money) {
+    ui->money->display((int)money);
+}
+
+void MainWindow::onOrderCreated(int order_id) {
+    ui->orderQueueLength->display(ui->orderQueueLength->intValue() + 1);
+}
+
+void MainWindow::onOrderRemoved(int order_id) {
+    ui->orderQueueLength->display(ui->orderQueueLength->intValue() - 1);
 }
 
 void MainWindow::toggleMainViews() {
@@ -39,3 +64,5 @@ void MainWindow::toggleMainViews() {
         ui->toggleMainViewButton->setText("Workbench");
     }
 }
+
+

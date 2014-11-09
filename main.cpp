@@ -49,7 +49,7 @@ void generate_orders(Factory* factory, Client clients[10]) {
         order_words.push_back(clients[n].get_words()[1]);
         order_words.push_back(clients[n].get_words()[2]);
         factory->create_order(order_words, clients[n], xp, price, "");
-        usleep(rand() % 5);
+        usleep(rand() % 10000000);
     }
 }
 
@@ -68,16 +68,11 @@ int main(int argc, char* argv[])
             Client(100, {"aaa", "bbb", "ggg"}, 9)
         };
 
-    std::map<std::string,int> first;
-    first["?"] = 5;
-    first["\\d"] = 5;
-    first["\\w\\w"] = 5;
-    Storage* storage = new Storage(first);
-    Factory* factory = new Factory(storage, 100, 30, 1, 20, 10);
-    std::thread sender(generate_orders, factory, clients);
     QApplication a(argc, argv);
     MainWindow w;
     w.show();
+    Factory* factory = w.GetFactory();
+    std::thread sender(generate_orders, factory, clients);
 
     return a.exec();
 }

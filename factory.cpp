@@ -41,12 +41,14 @@ void Factory::add_order(Order* order)
 {
     order->set_status(RECEIVED);
     orders_.insert(std::pair<std::size_t, Order*>(current_order_id_, order));
+    emit orderCreated(current_order_id_);
     current_order_id_++;
 }
 
 void Factory::remove_order(std::size_t order_id)
 {
     orders_.erase(order_id);
+    emit orderRemoved(order_id);
 }
 
 void Factory::set_orders(std::map<std::size_t, Order*> orders)
@@ -71,6 +73,7 @@ bool Factory::buy_part(Part part, Store store)
 void Factory::add_money(std::size_t additional_money)
 {
     money_ += additional_money;
+    emit moneyChanged(money_);
 }
 
 void Factory::buyWork()

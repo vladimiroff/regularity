@@ -65,7 +65,9 @@ public slots:
     Q_INVOKABLE bool validateRegExp(std::string regexp, vector<std::string> words);
 
 signals:
-    void newOrder(QString);
+    void orderCreated(int);
+    void orderRemoved(int);
+    void moneyChanged(int);
 
 private:
     std::vector<Worker*>            workers_;
