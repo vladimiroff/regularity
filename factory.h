@@ -59,6 +59,7 @@ public slots:
     Q_INVOKABLE void add_money(size_t);
     Q_INVOKABLE void buyWork();
     Q_INVOKABLE std::string takePart(std::string regexp);
+    Q_INVOKABLE void levelUp();
 
 signals:
     void newOrder(QString);
