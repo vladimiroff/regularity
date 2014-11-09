@@ -138,6 +138,8 @@ void MainWindow::onAddedMaterial(std::string material)
             QSize buttonSize(50, 50);
             ui->storageLayout->addWidget(pb, (buttons - 1) / 7, (buttons - 1) % 7);
             pb->setFixedSize(buttonSize);
+        } else if (!pb->isEnabled()) {
+            pb->setEnabled(true);
         }
     }
 }
@@ -160,7 +162,6 @@ void MainWindow::onTookMaterial(QString material)
     storage->get_material(stdMaterial);
     if(it->second <= 0) {
         pb->setDisabled(true);
-        delete pb;
     }
     ui->answer->setText(ui->answer->text() + material);
 }
