@@ -2,7 +2,9 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QSignalMapper>
 #include "factory.h"
+#include "storage.h"
 
 namespace Ui {
 class MainWindow;
@@ -20,6 +22,13 @@ public:
 private:
     Ui::MainWindow *ui;
     Factory* factory;
+    Storage* storage;
+    QSignalMapper* signalMapper;
+
+public slots:
+    void onAddedMaterial(std::string);
+    void onTookMaterial(QString);
+
 
 private slots:
     void toggleMainViews();

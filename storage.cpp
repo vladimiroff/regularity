@@ -17,6 +17,7 @@ void Storage::add_material(std::string material)
         materials_.insert(std::pair<std::string,int>(material,1));
     }
     materials_mutex_.unlock();
+    emit this->addedMaterial(material);
 }
 
 bool Storage::get_material(std::string material)
@@ -26,6 +27,8 @@ bool Storage::get_material(std::string material)
     {
         materials_[material] -= 1;
         materials_mutex_.unlock();
+
+        emit this->tookMaterial(material);
         return true;
     }
     else
@@ -35,7 +38,7 @@ bool Storage::get_material(std::string material)
     }
 }
 
-std::map<std::string,int> Storage::materials() const
+const std::map<std::string,int>& Storage::materials() const
 {
     return materials_;
 }

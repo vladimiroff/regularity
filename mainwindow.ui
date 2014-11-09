@@ -88,6 +88,17 @@
        <height>129</height>
       </rect>
      </property>
+     <widget class="QWidget" name="gridLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>-1</x>
+        <y>-1</y>
+        <width>541</width>
+        <height>131</height>
+       </rect>
+      </property>
+      <layout class="QGridLayout" name="storageLayout"/>
+     </widget>
     </widget>
    </widget>
    <widget class="QFrame" name="mainContainer">

@@ -3,7 +3,10 @@
 
 #include "factory.h"
 #include <map>
+#include <stdio.h>
 #include <QGridLayout>
+#include <QRegExp>
+#include <QList>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -11,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    signalMapper = new QSignalMapper();
 
     std::map<std::string,int> storageItems;
     storageItems["\\w"] = 10;
@@ -33,6 +37,32 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->takeOrder, SIGNAL(clicked()), this, SLOT(onOrderTaken()));
 
     factory->add_money(100);
+    storage = new Storage(storageItems);
+    connect(storage, SIGNAL(addedMaterial(std::string)), this, SLOT(onAddedMaterial(std::string)));
+    connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
+    connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("\\w");
+    storage->add_material("[aeoui]");
+    storage->add_material("[aeoui]");
+    storage->add_material("[aeoui]");
+    storage->add_material(".?");
+    storage->add_material(".?");
+    storage->add_material("\\d");
+    storage->add_material("\\d");
+    storage->add_material("\\d");
+    storage->add_material("\\d");
+    storage->add_material("a");
+    factory = new Factory(storage, 100, 30, 0, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
 }
 
 MainWindow::~MainWindow()
@@ -73,5 +103,45 @@ void MainWindow::onOrderTaken() {
     Order* order = factory->get_order_in_progress();
     QString text(order->get_words()[0].c_str());
     ui->orderInfo->setText(text);
+}
+
+void MainWindow::onAddedMaterial(std::string material)
+{
+    std::map<std::string,int>::const_iterator it = storage->materials().find(material);
+    if(it != storage->materials().end()) {
+        QString buttonName(material.c_str());
+        QPushButton* pb = ui->storage->findChild<QPushButton*>(buttonName);
+
+        if(pb == 0) {
+            int buttons = storage->materials().size();
+            QPushButton *pb = new QPushButton(buttonName);
+            pb->setObjectName(buttonName);
+            connect(pb, SIGNAL(clicked()), signalMapper, SLOT(map()));
+            signalMapper->setMapping(pb, buttonName);
+            ui->storageLayout->addWidget(pb, buttons / 8, buttons % 8);
+        }
+    }
+}
+
+void MainWindow::onTookMaterial(QString material)
+{
+    std::string stdMaterial = material.toStdString();
+    std::map<std::string,int>::const_iterator it = storage->materials().find(stdMaterial);
+
+    if(it == storage->materials().end()) {
+        return;
+    }
+
+    QPushButton* pb = ui->storage->findChild<QPushButton*>(material);
+    if(pb == 0) {
+        qDebug() << "Button with name " << material << " is missing!";
+        return;
+    }
+
+    storage->get_material(stdMaterial);
+    if(it->second <= 0) {
+        pb->setDisabled(true);
+        delete pb;
+    }
 }
 

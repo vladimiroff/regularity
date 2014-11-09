@@ -3,16 +3,22 @@
 
 #include <map>
 #include <mutex>
+#include <QObject>
 
-class Storage
+class Storage : public QObject
 {
+    Q_OBJECT
 public:
     Storage(std::map<std::string,int>);
 
     void add_material(std::string);
     bool get_material(std::string);
 
-    std::map<std::string, int> materials() const;
+    const std::map<std::string, int> &materials() const;
+
+signals:
+    void addedMaterial(std::string);
+    void tookMaterial(std::string);
 
 private:
     std::map<std::string,int> materials_;
