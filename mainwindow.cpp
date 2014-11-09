@@ -22,7 +22,6 @@ MainWindow::MainWindow(QWidget *parent) :
     std::map<std::string,int> storageItems;
     storage = new Storage(storageItems);
     factory = new Factory(storage, 0, 0, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
-    factory->add_money(100);
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
@@ -235,8 +234,9 @@ void MainWindow::populateStore()
 
 void MainWindow::onPartBought(QString part)
 {
-    factory->buy_part(part.toStdString(), store);
-    storage->add_material(part.toStdString());
+    if(factory->buy_part(part.toStdString(), store)) {
+        storage->add_material(part.toStdString());
+    }
 }
 
 void MainWindow::onLevelChanged(int level) {
