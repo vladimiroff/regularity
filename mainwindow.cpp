@@ -7,6 +7,7 @@
 #include <QGridLayout>
 #include <QRegExp>
 #include <QList>
+#include <QStringList>
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
@@ -98,8 +99,11 @@ void MainWindow::onOrderTaken() {
     if(id != -1) {
         factory->remove_order(id);
         Order* order = factory->get_order_in_progress();
-        QString text(order->get_words()[0].c_str());
-        ui->orderInfo->setText(text);
+        QStringList words;
+        for (std::string word : order->get_words()) {
+            words << QString(word.c_str());
+        }
+        ui->orderInfo->setText(words.join(", "));
         enableInput();
     }
 }
