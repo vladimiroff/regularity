@@ -15,6 +15,9 @@ bool check_matching(std::vector<std::string> words, std::string expression)
 {
     QString qexpression(expression.c_str());
     QRegExp r(qexpression);
+    if(!r.isValid()) {
+        return false;
+    }
     for(std::string word : words) {
         QString qword(word.c_str());
         if(!r.exactMatch(qword)) {
@@ -28,6 +31,9 @@ bool starting_with(std::vector<std::string> words, std::string expression)
 {
     QString qexpression(expression.c_str());
     QRegExp r(qexpression);
+    if(!r.isValid()) {
+        return false;
+    }
     for(std::string word : words) {
         QString qword(word.c_str());
         if(r.isValid()) {
