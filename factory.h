@@ -36,7 +36,7 @@ public:
     void rating_decrease(float less_rating);
     void set_rating(float new_rating);                  //set_rating
     void set_current_order_id(std::size_t id);
-    void create_order(std::vector<std::string> words, Client client, std::size_t experience,
+    void create_order(std::vector<std::string> words, Client& client, std::size_t experience,
                       std::size_t price, std::string string);
     void experience_increase(std::size_t additional_experience);
     void level_up();

@@ -5,6 +5,7 @@
 #include <string>
 #include <vector>
 #include <QObject>
+#include <QListWidgetItem>
 
 enum Status {SENT, RECEIVED, DONE, IN_PROGRESS, NOT_ENOUGH_PARTS};
 

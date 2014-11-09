@@ -147,7 +147,7 @@ void Factory::level_up()
     level_experience_ *= 2;
 }
 
-void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,
+void Factory::create_order(std::vector<std::string> words, Client& client, std::size_t price, std::size_t experience,
                            std::string solution = "")
 {
     Order new_order(words, SENT, price, experience, client, solution);
