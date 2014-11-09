@@ -47,12 +47,20 @@ void generate_orders(Factory* factory, Client clients[10]) {
         int price = generate_order_price(clients[n]);
         int xp = generate_order_experiance(clients[n]);
         std::vector<std::string> client_words = clients[n].get_words();
-        std::srand(rand() % 20);
-        std::random_shuffle(client_words.begin(), client_words.end());
+
+
         std::vector<std::string> order_words;
-        order_words.push_back(clients[n].get_words()[0]);
-        order_words.push_back(clients[n].get_words()[1]);
-        order_words.push_back(clients[n].get_words()[2]);
+        unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+        std::shuffle(client_words.begin(), client_words.end(), std::default_random_engine(seed));
+
+        for (std::string& word: client_words) {
+            qDebug() << word.c_str();
+            order_words.push_back(word);
+            if(order_words.size() == 3){
+                break;
+            }
+        }
+
         factory->create_order(order_words, clients[n], xp, price, "");
 
         usleep(rand() % 10000000);
