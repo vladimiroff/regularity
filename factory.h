@@ -12,7 +12,7 @@
 #include <memory>
 
 // index of vector is level and map is parts in store for this level
-typedef std::vector<std::map<std::string, Part*>> Store;
+typedef std::map<std::string, std::size_t> Store;
 
 class Factory : public QObject
 {

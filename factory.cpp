@@ -58,7 +58,7 @@ void Factory::set_orders(std::map<std::size_t, Order*> orders)
 
 bool Factory::buy_part(Part part, Store store)
 {
-    if (store[level_].find(part.part) != store[level_].end() && money_ >= part.price)
+    if (store.find(part.part) != store.end() && money_ >= part.price)
     {
         money_ -= part.price;
         storage_->add_material(part.part);
@@ -99,9 +99,9 @@ void Factory::levelUp()
 
 bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
 {
-        std::size_t price = store[level_][regexp]->price;
+        std::size_t price = store[regexp];
 
-        if (store[level_].find(regexp) != store[level_].end() && money_ >= quantity * price )
+        if (store.find(regexp) != store.end() && money_ >= quantity * price )
         {
             for(size_t i = 0; i < quantity; i++)
             {

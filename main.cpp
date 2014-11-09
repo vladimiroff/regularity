@@ -66,8 +66,13 @@ void generate_orders(Factory* factory, Client clients[10]) {
     }
 }
 
+
 int main(int argc, char* argv[])
 {
+
+    Store store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2}};
+
+
     Client clients[10] = {
             Client(100, {"aaa", "bbb", "ggg"}, 0),
             Client(100, {"fff", "bbb", "ggg"}, 1),
