@@ -43,7 +43,7 @@ std::vector<std::string> generate_order_words(Client client)
 void generate_orders(Factory* factory, Client clients[10]) {
     while(true) {
 
-        int n = rand() % factory->get_level();
+        int n = factory->get_level() - 1;
         int price = generate_order_price(clients[n]);
         int xp = generate_order_experiance(clients[n]);
         std::vector<std::string> client_words = clients[n].get_words();

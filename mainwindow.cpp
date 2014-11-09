@@ -64,10 +64,10 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("[q-t]");
     storage->add_material("[l-s]");
     storage->add_material("[x-z]");
-    store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
+    store = {{"( ͡° ͜ʖ ͡°)", 9001}, {"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
             {"[abcdf]", 1}, {"[xyzt]", 1}, {"[qwerty]", 1},
             {"[aeiouy]", 1}, {"[jklmn]", 1}, {"?", 5}, {"|", 5}, {".", 5},
-            {"+", 10}, {"*", 15}, {"[", 0},{"]", 0},{"(", 0},{")",0}};
+            {"+", 10}, {"*", 15}, {"[", 0},{"]", 0}};
 
     ui->storageLayout->setContentsMargins(1, 1, 1, 1);
     populateStore();
@@ -110,7 +110,10 @@ void MainWindow::onOrderTaken() {
     ui->answer->setText("^");
     enableInput();
     int id = factory->take_order();
-    if(id != -1) {
+    if(id == -1) {
+        ui->orderInfo->setText("");
+        disableInput();
+    } else {
         factory->remove_order(id);
         Order* order = factory->get_order_in_progress();
         QStringList words;
@@ -135,7 +138,7 @@ void MainWindow::onAddedMaterial(std::string material)
             pb->setObjectName(buttonName);
             connect(pb, SIGNAL(clicked()), signalMapper, SLOT(map()));
             signalMapper->setMapping(pb, buttonName);
-            QSize buttonSize(50, 50);
+            QSize buttonSize(90, 70);
             ui->storageLayout->addWidget(pb, (buttons - 1) / 7, (buttons - 1) % 7);
             pb->setFixedSize(buttonSize);
         } else if (!pb->isEnabled()) {
@@ -155,7 +158,6 @@ void MainWindow::onTookMaterial(QString material)
 
     QPushButton* pb = ui->storage->findChild<QPushButton*>(material);
     if(pb == 0) {
-        qDebug() << "Button with name " << material << " is missing!";
         return;
     }
 

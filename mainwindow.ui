@@ -534,8 +534,11 @@
        </rect>
       </property>
       <layout class="QGridLayout" name="storageLayout">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
        <property name="spacing">
-        <number>2</number>
+        <number>0</number>
        </property>
       </layout>
      </widget>

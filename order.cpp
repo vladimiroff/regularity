@@ -25,7 +25,6 @@ Status Order::get_status()
 
 std::size_t Order::get_experience()
 {
-    qDebug() << experience_;
     return experience_;
 }
 

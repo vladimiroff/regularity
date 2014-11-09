@@ -162,9 +162,11 @@ void Factory::experience_increase(std::size_t experience)
 void Factory::level_up()
 {
     emit ratingChanged(100);
-    level_++;
-    level_experience_ *= 2;
-    emit levelChanged(level_);
+    if(level_ < 10) {
+        level_++;
+        level_experience_ *= 2;
+        emit levelChanged(level_);
+    }
 }
 
 void Factory::create_order(std::vector<std::string> words, Client& client, std::size_t price, std::size_t experience,
