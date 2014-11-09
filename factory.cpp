@@ -84,10 +84,12 @@ void Factory::buyWork()
 
 std::string Factory::takePart(std::string regexp)
 {
-    if(storage_->get_material(regexp))
+    if(storage_->get_material(regexp)) {
         return regexp;
-    else
-        qDebug() << "Dont have this element";
+    }
+    else {
+        return "";
+    }
 }
 
 void Factory::levelUp()
