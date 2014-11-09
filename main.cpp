@@ -70,16 +70,16 @@ void generate_orders(Factory* factory, Client clients[10]) {
 int main(int argc, char* argv[])
 {
     Client clients[10] = {
-            Client(100, {"a", "b", "aa", "bb", "aaa"}, 0),
-            Client(100, {"rat", "hat", "bat", "cat" }, 1),
-            Client(100, {"panda", "banda", "fanta", "lambda", "banana"}, 2),
-            Client(100, {"a1", "a2", "bb4", "bbb6xy", "a7xy"}, 3),
-            Client(100, {"aaa", "bbb", "ggg"}, 4),
-            Client(100, {"aaa", "bbb", "ggg"}, 5),
-            Client(100, {"aaa", "bbb", "ggg"}, 6),
-            Client(100, {"aaa", "bbb", "ggg"}, 7),
-            Client(100, {"aaa", "bbb", "ggg"}, 8),
-            Client(100, {"aaa", "bbb", "ggg"}, 9)
+            Client(100, {"a", "b", "aa", "bb", "aaa", "dd", "ddd"}, 0),
+            Client(100, {"rat", "hat", "bat", "cat", "mat", "pat", "wat"}, 1),
+            Client(100, {"panda", "banda", "fanta", "lambda", "banana", "mana", "kanna"}, 2),
+            Client(100, {"lol1", "larodi2", "lambda4", "lala6", "lada7", "word4", "world9", "plan9"}, 3),
+            Client(100, {"p67eo", "e44o4", "r2d2", "a5x4sr", "r3k4a", "l3d1k"}, 4),
+            Client(100, {"ka\\pa", "a\\ll", "xm\\l", "sla\\sh", "a\\rr"}, 5),
+            Client(100, {"la   la", "spa ce", "o   pen", " almost there", "free doom"}, 6),
+            Client(100, {"i am a dot.", "this should be hard!", "what?", "who?", "when?", "panda!", "mhm."}, 7),
+            Client(100, {"[a]", "(d)", "{b}", "[b]", "{d}", "(w)"}, 8),
+            Client(100, {"\\w\\d+", "\\d+\\d", ".*", "\\W+", "\\s\\s", "\\d*"}, 9)
         };
 
     QApplication a(argc, argv);
