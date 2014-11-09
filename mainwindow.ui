@@ -148,7 +148,7 @@
         </rect>
        </property>
        <property name="text">
-        <string>TextLabel</string>
+        <string/>
        </property>
       </widget>
       <widget class="QLineEdit" name="answer">
@@ -164,10 +164,10 @@
         <string notr="true">font: 36pt &quot;Monospace&quot;;</string>
        </property>
        <property name="text">
-        <string>word</string>
+        <string>^</string>
        </property>
        <property name="alignment">
-        <set>Qt::AlignCenter</set>
+        <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
        </property>
       </widget>
      </widget>

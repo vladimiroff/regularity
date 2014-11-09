@@ -16,31 +16,23 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     signalMapper = new QSignalMapper();
 
-    std::map<std::string,int> storageItems;
-    storageItems["\\w"] = 10;
-    storageItems["[aeoui]"] = 3;
-    storageItems[".?"] = 3;
-    storageItems["\\d"] = 7;
-    storageItems["\\"] = 4;
-    storageItems["?"] = 2;
-    storageItems["a"] = 2;
-    storageItems["\\w\\d"] = 5;
-    Storage* storage = new Storage(storageItems);
-    Factory* factory = new Factory(storage, 0, 30, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
-    this->factory = factory;
 
     //signals
+
+    std::map<std::string,int> storageItems;
+    storage = new Storage(storageItems);
+    factory = new Factory(storage, 0, 30, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
+    factory->add_money(100);
+
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
     connect(factory, SIGNAL(orderRemoved(int)), this, SLOT(onOrderRemoved(int)));
     connect(ui->takeOrder, SIGNAL(clicked()), this, SLOT(onOrderTaken()));
-
-    factory->add_money(100);
-    storage = new Storage(storageItems);
     connect(storage, SIGNAL(addedMaterial(std::string)), this, SLOT(onAddedMaterial(std::string)));
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
+
     storage->add_material("\\w");
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -62,7 +54,6 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("\\d");
     storage->add_material("\\d");
     storage->add_material("a");
-    factory = new Factory(storage, 100, 30, 0, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
 }
 
 MainWindow::~MainWindow()
@@ -143,5 +134,6 @@ void MainWindow::onTookMaterial(QString material)
         pb->setDisabled(true);
         delete pb;
     }
+    ui->answer->setText(ui->answer->text() + material);
 }
 

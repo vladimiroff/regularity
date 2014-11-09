@@ -82,7 +82,6 @@ int main(int argc, char* argv[])
             Client(100, {"aaa", "bbb", "ggg"}, 9)
         };
 
-    qDebug() << ".";
     QApplication a(argc, argv);
     MainWindow w;
     w.show();

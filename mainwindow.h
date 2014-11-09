@@ -29,7 +29,6 @@ public slots:
     void onAddedMaterial(std::string);
     void onTookMaterial(QString);
 
-
 private slots:
     void toggleMainViews();
     void onMoneyChanged(int);
