@@ -31,17 +31,11 @@ MainWindow::~MainWindow()
 
 void MainWindow::toggleMainViews() {
     int currentIndex = ui->mainViews->currentIndex();
-    QFont currentFont = ui->toggleMainViewButton->font();
     if (currentIndex) {
         ui->mainViews->setCurrentIndex(0);
         ui->toggleMainViewButton->setText("Shop");
-        currentFont.setPointSize(currentFont.pointSize() + 5);
-        currentFont.setPixelSize(currentFont.pixelSize() + 1);
     } else {
         ui->mainViews->setCurrentIndex(1);
         ui->toggleMainViewButton->setText("Workbench");
-        currentFont.setPointSize(currentFont.pointSize() - 5);
-        currentFont.setPixelSize(currentFont.pixelSize() - 1);
     }
-    ui->toggleMainViewButton->setFont(currentFont);
 }
