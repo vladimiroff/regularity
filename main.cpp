@@ -70,14 +70,18 @@ void generate_orders(Factory* factory, Client clients[10]) {
 int main(int argc, char* argv[])
 {
 
-    Store store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2}};
+    Store store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
+                    {"abcdf", 1}, {"xyzt", 1}, {"qwerty", 1},
+                    {"aeiouy", 1}, {"jklmn", 1}, {"?", 5}, {"|", 5}, {".", 5},
+                    {"+", 10}, {"*", 15}, {"[", 0},{"]", 0},{"(", 0},{")",0}};
+
 
 
     Client clients[10] = {
-            Client(100, {"aaa", "bbb", "ggg"}, 0),
-            Client(100, {"fff", "bbb", "ggg"}, 1),
-            Client(100, {"aaa", "bbb", "ggg"}, 2),
-            Client(100, {"aaa", "bbb", "ggg"}, 3),
+            Client(100, {"a", "b", "aa", "bb", "aaa"}, 0),
+            Client(100, {"rat", "hat", "bat", "cat" }, 1),
+            Client(100, {"panda", "banda", "fanta", "lambda", "banana"}, 2),
+            Client(100, {"a1", "a2", "bb4", "bbb6xy", "a7xy"}, 3),
             Client(100, {"aaa", "bbb", "ggg"}, 4),
             Client(100, {"aaa", "bbb", "ggg"}, 5),
             Client(100, {"aaa", "bbb", "ggg"}, 6),
