@@ -63,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("[x-z]");
 
     ui->storageLayout->setContentsMargins(1, 1, 1, 1);
+    populateStore();
 
 }
 
@@ -173,7 +174,8 @@ void MainWindow::onCheck() {
     disableInput();
 }
 
-void MainWindow::disableInput() {
+void MainWindow::disableInput()
+{
     ui->check->setDisabled(true);
     ui->storage->setDisabled(true);
     ui->answer->setDisabled(true);
@@ -181,12 +183,44 @@ void MainWindow::disableInput() {
 
 }
 
-void MainWindow::enableInput() {
+void MainWindow::enableInput()
+{
     ui->check->setEnabled(true);
     ui->storage->setEnabled(true);
     ui->takeOrder->setDisabled(true);
 }
 
-void MainWindow::onRatingChanged(float rating) {
+void MainWindow::onRatingChanged(float rating)
+{
     ui->xp->setValue(rating);
+}
+
+void MainWindow::populateStore()
+{
+    Store store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
+                    {"[abcdf]", 1}, {"[xyzt]", 1}, {"[qwerty]", 1},
+                    {"[aeiouy]", 1}, {"[jklmn]", 1}, {"?", 5}, {"|", 5}, {".", 5},
+                    {"+", 10}, {"*", 15}, {"[", 0},{"]", 0},{"(", 0},{")",0}};
+    int row = 0;
+    int i = 0;
+    for(auto item : store) {
+        QString name(item.first.c_str());
+        QString price(QString::number(item.second));
+        QPushButton *button = new QPushButton(name);
+        QLabel *label = new QLabel("$"+price);
+        button->setObjectName(name);
+        label->setObjectName(price);
+        label->setAlignment(Qt::AlignCenter);
+        ui->shopLayout->addWidget(button, row, i, Qt::AlignCenter);
+        ui->shopLayout->addWidget(label, row+1, i, Qt::AlignCenter);
+        QSize widgetSize(50, 50);
+        button->setFixedSize(widgetSize);
+        label->setFixedSize(widgetSize);
+        i++;
+        if(i == 9) {
+            i = 0;
+            row += 2;
+        }
+    }
+
 }

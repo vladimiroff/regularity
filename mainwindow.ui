@@ -185,6 +185,17 @@
       <property name="styleSheet">
        <string notr="true">background-color: rgb(255, 0, 0);</string>
       </property>
+      <widget class="QWidget" name="gridLayoutWidget_2">
+       <property name="geometry">
+        <rect>
+         <x>-1</x>
+         <y>-1</y>
+         <width>691</width>
+         <height>241</height>
+        </rect>
+       </property>
+       <layout class="QGridLayout" name="shopLayout"/>
+      </widget>
      </widget>
     </widget>
    </widget>
