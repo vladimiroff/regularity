@@ -125,7 +125,7 @@ void Factory::experience_increase(std::size_t experience)
 void Factory::level_up()
 {
     level_++;
-    level_experience_ *= 2
+    level_experience_ *= 2;
 }
 
 void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,
