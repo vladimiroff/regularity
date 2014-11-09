@@ -17,13 +17,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     ui->storage->setWidgetResizable(true);
     signalMapper = new QSignalMapper();
-
+    shopSignalMapper = new QSignalMapper();
     //signals
     std::map<std::string,int> storageItems;
     storage = new Storage(storageItems);
     factory = new Factory(storage, 0, 0, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
     factory->add_money(100);
-
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
@@ -33,9 +32,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
     connect(factory, SIGNAL(ratingChanged(float)), this, SLOT(onRatingChanged(float)));
-
+    connect(shopSignalMapper, SIGNAL(mapped(QString)), this, SLOT(onPartBought(QString)));
     disableInput();
-
     storage->add_material("\\w");
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -50,6 +48,9 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("[aeoui]");
     storage->add_material("[aeoui]");
     storage->add_material("[aeoui]");
+    storage->add_material(".?");
+    storage->add_material(".?");
+    storage->add_material(".?");
     storage->add_material(".?");
     storage->add_material(".?");
     storage->add_material("\\d");
@@ -61,6 +62,11 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("[q-t]");
     storage->add_material("[l-s]");
     storage->add_material("[x-z]");
+    qDebug() << "Here";
+    store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
+            {"[abcdf]", 1}, {"[xyzt]", 1}, {"[qwerty]", 1},
+            {"[aeiouy]", 1}, {"[jklmn]", 1}, {"?", 5}, {"|", 5}, {".", 5},
+            {"+", 10}, {"*", 15}, {"[", 0},{"]", 0},{"(", 0},{")",0}};
 
     ui->storageLayout->setContentsMargins(1, 1, 1, 1);
     populateStore();
@@ -197,10 +203,7 @@ void MainWindow::onRatingChanged(float rating)
 
 void MainWindow::populateStore()
 {
-    Store store = {{"\\w", 2}, {"\\d", 2}, {"\\s", 2}, {"\\W", 2},
-                    {"[abcdf]", 1}, {"[xyzt]", 1}, {"[qwerty]", 1},
-                    {"[aeiouy]", 1}, {"[jklmn]", 1}, {"?", 5}, {"|", 5}, {".", 5},
-                    {"+", 10}, {"*", 15}, {"[", 0},{"]", 0},{"(", 0},{")",0}};
+
     int row = 0;
     int i = 0;
     for(auto item : store) {
@@ -210,6 +213,8 @@ void MainWindow::populateStore()
         QLabel *label = new QLabel("$"+price);
         button->setObjectName(name);
         label->setObjectName(price);
+        shopSignalMapper->setMapping(button, name);
+        connect(button, SIGNAL(clicked()), shopSignalMapper, SLOT(map()));
         label->setAlignment(Qt::AlignCenter);
         ui->shopLayout->addWidget(button, row, i, Qt::AlignCenter);
         ui->shopLayout->addWidget(label, row+1, i, Qt::AlignCenter);
@@ -222,5 +227,9 @@ void MainWindow::populateStore()
             row += 2;
         }
     }
+}
 
+void MainWindow::onPartBought(QString part) {
+    factory->buy_part(part.toStdString(), store);
+    storage->add_material(part.toStdString());
 }

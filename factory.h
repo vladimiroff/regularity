@@ -42,7 +42,7 @@ public:
                       std::size_t price, std::string string);
     void experience_increase(std::size_t additional_experience);
     void level_up();
-    bool buy_part(Part part, Store store);
+    bool buy_part(std::string part, Store store);
     int take_order();
 
     // get methods

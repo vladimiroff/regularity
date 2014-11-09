@@ -56,12 +56,13 @@ void Factory::set_orders(std::map<std::size_t, Order*> orders)
     orders_ = orders;
 }
 
-bool Factory::buy_part(Part part, Store store)
+bool Factory::buy_part(std::string part, Store store)
 {
-    if (store.find(part.part) != store.end() && money_ >= part.price)
+    if (store.find(part) != store.end() && money_ >= store[part])
     {
-        money_ -= part.price;
-        storage_->add_material(part.part);
+        money_ -= store[part];
+        emit this->moneyChanged(money_);
+        storage_->add_material(part);
         return true;
     }
     else
@@ -151,6 +152,7 @@ void Factory::set_current_order_id(size_t id)
 void Factory::experience_increase(std::size_t experience)
 {
     factory_experience_ += experience;
+
 }
 
 void Factory::level_up()

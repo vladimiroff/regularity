@@ -26,10 +26,13 @@ private:
     Factory* factory;
     Storage* storage;
     QSignalMapper* signalMapper;
+    QSignalMapper* shopSignalMapper;
+    Store store;
 
 public slots:
     void onAddedMaterial(std::string);
     void onTookMaterial(QString);
+    void onPartBought(QString);
 
 private slots:
     void toggleMainViews();
