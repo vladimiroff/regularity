@@ -68,7 +68,8 @@ bool Factory::buy_part(Part part, Store store)
     }
 }
 
-void Factory::add_money(size_t additional_money) {
+void Factory::add_money(std::size_t additional_money)
+{
     money_ += additional_money;
     emit this->moneyChanged(money_);
 }

@@ -31,7 +31,6 @@ public:
     void add_order(Order* new_order);
     void set_orders(std::map<size_t, Order*> orders);          //set_orders using vector
     void remove_order(std::size_t order_id);
-    void add_money(std::size_t additional_money);
     void set_money(std::size_t money);                  //set_money
     void rating_increase(float additional_rating);
     void rating_decrease(float less_rating);
@@ -56,7 +55,7 @@ public:
 
 
 public slots:
-    Q_INVOKABLE void add_money(size_t);
+    Q_INVOKABLE void add_money(std::size_t);
     Q_INVOKABLE void buyWork();
     Q_INVOKABLE std::string takePart(std::string regexp);
     Q_INVOKABLE void levelUp();

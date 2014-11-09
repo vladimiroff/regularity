@@ -25,7 +25,7 @@ std::vector<std::string> generate_order_words(Client client)
     return client.get_words();
 }
 
-int main()
+int main(int argc, char* argv[])
 {
     QApplication a(argc, argv);
     MainWindow w;

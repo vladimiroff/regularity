@@ -18,7 +18,7 @@ MainWindow::MainWindow(QWidget *parent) :
     storageItems["\d"] = 7;
 
     Storage* storage = new Storage(storageItems);
-    Factory* factory = new Factory(storage, 5, 1.2, 5, 2, 1, std::vector<Worker*>(), std::vector<Order>());
+    Factory* factory = new Factory(storage, 100, 30, 0, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
 
 }
 
