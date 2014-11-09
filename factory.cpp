@@ -1,5 +1,6 @@
 #include "factory.h"
 #include "storage.h"
+#include <QDebug>
 
 
 Factory::Factory(Storage* storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,

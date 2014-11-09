@@ -5,8 +5,7 @@
 #include "order.h"
 #include "storage.h"
 
-#include <QQuickItem>
-#include <QtQuick>
+#include <QObject>
 #include <QString>
 #include <vector>
 #include <map>
@@ -15,7 +14,7 @@
 // index of vector is level and map is parts in store for this level
 typedef std::vector<std::map<std::string, Part>> Store;
 
-class Factory : public QQuickItem
+class Factory : public QObject
 {
     Q_OBJECT
 
@@ -25,13 +24,12 @@ public:
     Factory(Storage *storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
             std::size_t level_experience, std::vector<Worker*> workers, std::vector<Order> orders);
 
-
     void add_worker(Worker* new_worker);
     void remove_worker();
     void set_workers(std::vector<Worker*> workers);      //set_workers using vector
     void add_order(Order new_order);
     void set_orders(std::vector<Order> orders);          //set_orders using vector
-    void remove_order(); 
+    void remove_order();
     void add_money(std::size_t additional_money);
     void set_money(std::size_t money);                  //set_money
     void rating_increase(float additional_rating);
@@ -42,7 +40,6 @@ public:
     void experience_increase(std::size_t additional_experience);
     void level_up();
     bool buy_part(Part part, Store store);
-
 
 
     // get methods
@@ -56,7 +53,7 @@ public:
 
 
 public slots:
-    Q_INVOKABLE QString add_money();
+    QString add_money();
 
 signals:
     void newOrder(QString);
