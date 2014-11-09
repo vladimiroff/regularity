@@ -71,7 +71,6 @@ bool Factory::buy_part(Part part, Store store)
 void Factory::add_money(std::size_t additional_money)
 {
     money_ += additional_money;
-    emit this->moneyChanged(money_);
 }
 
 void Factory::buyWork()
@@ -93,7 +92,6 @@ void Factory::levelUp()
     level_up();
 }
 
-
 bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
 {
         std::size_t price = store[level_][regexp]->price;
@@ -112,27 +110,6 @@ bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
             return false;
         }
 }
-
-
-bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
-{
-        std::size_t price = store[level_][regexp]->price;
-
-        if (store[level_].find(regexp) != store[level_].end() && money_ >= quantity * price )
-        {
-            for(size_t i = 0; i < quantity; i++)
-            {
-                money_ -= price;
-                storage_->add_material(regexp);
-            }
-            return true;
-        }
-        else
-        {
-            return false;
-        }
-}
-
 
 void Factory::set_money(std::size_t money)
 {
