@@ -9,6 +9,7 @@
 #include <QList>
 #include <QStringList>
 #include <QDebug>
+#include <thread>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -21,7 +22,8 @@ MainWindow::MainWindow(QWidget *parent) :
     //signals
     std::map<std::string,int> storageItems;
     storage = new Storage(storageItems);
-    factory = new Factory(storage, 0, 0, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
+    std::vector<Worker*> workers = {new Worker(storage)};
+    factory = new Factory(storage, 0, 0, 1, 20, 10, 0,  workers, std::map<std::size_t, Order*>());
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
@@ -34,6 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
     connect(shopSignalMapper, SIGNAL(mapped(QString)), this, SLOT(onPartBought(QString)));
     connect(factory,SIGNAL(levelChanged(int)), this, SLOT(onLevelChanged(int)));
+    connect(ui->worker_0, SIGNAL(clicked()), this, SLOT(onWork0Start()));
     disableInput();
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -241,4 +244,19 @@ void MainWindow::onPartBought(QString part)
 
 void MainWindow::onLevelChanged(int level) {
     ui->level->display((int) level);
+}
+
+void MainWindow::helper(Order* order, int i) {
+    Worker* worker = factory->get_workers()[i];
+    worker->execute_order(order);
+}
+
+void MainWindow::onWorker0Start() {
+    if(factory->get_workers().size() > 0) {
+        if(factory->get_orders().size() > 0) {
+            Order* order = factory->get_orders()[0];
+            Worker* worker = factory->get_workers()[0];
+            std::thread work(helper, order, 0);
+        }
+    }
 }

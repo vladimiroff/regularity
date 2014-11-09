@@ -5,6 +5,7 @@
 #include <QRegExp>
 #include <QString>
 #include <iostream>
+#include <QDebug>
 
 Worker::Worker(Storage* storage)
 {
@@ -64,6 +65,7 @@ bool Worker::execute_order(Order& order)
                 start = begin + material;
                 if(check_matching(order.get_words(), start)) {
                     order.set_solution(start);
+                    qDebug() << start.c_str();
                     return true;
                 }
                 else {

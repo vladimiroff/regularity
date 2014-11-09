@@ -20,6 +20,7 @@ public:
     Factory* GetFactory();
     void disableInput();
     void enableInput();
+    void helper(Order* order, int i);
 
 private:
     Ui::MainWindow *ui;
@@ -44,6 +45,7 @@ private slots:
     void onRatingChanged(float);
     void populateStore();
     void onLevelChanged(int);
+    void onWorker0Start();
 };
 
 #endif // MAINWINDOW_H
