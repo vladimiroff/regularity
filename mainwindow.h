@@ -18,6 +18,8 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     Factory* GetFactory();
+    void disableInput();
+    void enableInput();
 
 private:
     Ui::MainWindow *ui;

@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
 
+    disableInput();
+
     storage->add_material("\\w");
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -55,6 +57,7 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("\\d");
     storage->add_material("[a-c]");
     storage->add_material("[d-f]");
+
 }
 
 MainWindow::~MainWindow()
@@ -96,6 +99,7 @@ void MainWindow::onOrderTaken() {
         Order* order = factory->get_order_in_progress();
         QString text(order->get_words()[0].c_str());
         ui->orderInfo->setText(text);
+        enableInput();
     }
 }
 
@@ -153,4 +157,17 @@ void MainWindow::onCheck() {
         ui->answer->setText("You suck at this!");
         factory->rating_decrease(order->get_experience());
     }
+    disableInput();
+}
+
+void MainWindow::disableInput() {
+    ui->check->setDisabled(true);
+    ui->storage->setDisabled(true);
+    ui->answer->setDisabled(true);
+
+}
+
+void MainWindow::enableInput() {
+    ui->check->setEnabled(true);
+    ui->storage->setEnabled(true);
 }
