@@ -87,6 +87,12 @@ std::string Factory::takePart(std::string regexp)
         qDebug() << "Dont have this element";
 }
 
+void Factory::levelUp()
+{
+    level_up();
+}
+
+
 void Factory::set_money(std::size_t money)
 {
     money_ = money;
@@ -120,6 +126,7 @@ void Factory::experience_increase(std::size_t experience)
 void Factory::level_up()
 {
     level_++;
+    level_experience_ *= 2
 }
 
 void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,

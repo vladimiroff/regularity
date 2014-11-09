@@ -61,7 +61,7 @@ public slots:
     Q_INVOKABLE void add_money();
     Q_INVOKABLE void buyWork();
     Q_INVOKABLE std::string takePart(std::string regexp);
-  //  Q_INVOKABLE void levelUp();
+    Q_INVOKABLE void levelUp();
 
 signals:
     void moneyChanged(std::size_t);
