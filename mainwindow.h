@@ -20,7 +20,6 @@ public:
     Factory* GetFactory();
     void disableInput();
     void enableInput();
-    void helper(Order* order, int i);
 
 private:
     Ui::MainWindow *ui;

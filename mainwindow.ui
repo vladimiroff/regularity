@@ -655,6 +655,24 @@ border-color: rgb(52, 214, 23);</string>
        <property name="frameShadow">
         <enum>QFrame::Raised</enum>
        </property>
+       <widget class="QPushButton" name="worker0">
+        <property name="geometry">
+         <rect>
+          <x>0</x>
+          <y>0</y>
+          <width>131</width>
+          <height>61</height>
+         </rect>
+        </property>
+        <property name="styleSheet">
+         <string notr="true">background-color: rgb(75, 129, 217);
+font: 75 11pt &quot;Verdana&quot;;
+color: rgb(255, 244, 248);</string>
+        </property>
+        <property name="text">
+         <string>( ͡° ͜ʖ ͡°)</string>
+        </property>
+       </widget>
       </widget>
       <widget class="QFrame" name="worker_3">
        <property name="geometry">
@@ -1745,7 +1763,7 @@ color: rgb(255, 244, 248);</string>
      <x>0</x>
      <y>0</y>
      <width>712</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
   </widget>

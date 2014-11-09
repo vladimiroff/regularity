@@ -20,6 +20,7 @@ class Order
 public:
     Order(std::vector<std::string> words, Status status, std::size_t experience,
           std::size_t price, Client client, std::string solution);
+    Order(const Order&);
     vector<std::string> get_words();
     Status get_status();
     std::size_t get_experience();

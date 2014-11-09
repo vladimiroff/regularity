@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
     connect(shopSignalMapper, SIGNAL(mapped(QString)), this, SLOT(onPartBought(QString)));
     connect(factory,SIGNAL(levelChanged(int)), this, SLOT(onLevelChanged(int)));
-    connect(ui->worker_0, SIGNAL(clicked()), this, SLOT(onWork0Start()));
+    connect(ui->worker0, SIGNAL(clicked()), this, SLOT(onWorker0Start()));
     disableInput();
     storage->add_material("\\w");
     storage->add_material("\\w");
@@ -246,17 +246,20 @@ void MainWindow::onLevelChanged(int level) {
     ui->level->display((int) level);
 }
 
-void MainWindow::helper(Order* order, int i) {
-    Worker* worker = factory->get_workers()[i];
-    worker->execute_order(order);
+void helper(Worker* worker, Order* order) {
+
+    worker->execute_order(*order);
 }
 
 void MainWindow::onWorker0Start() {
     if(factory->get_workers().size() > 0) {
         if(factory->get_orders().size() > 0) {
-            Order* order = factory->get_orders()[0];
+            int id = factory->take_order();
+            Order* order = factory->get_orders()[id];
             Worker* worker = factory->get_workers()[0];
-            std::thread work(helper, order, 0);
+            std::thread work(helper, worker, order);
+            work.join();
+            factory->remove_order(id);
         }
     }
 }

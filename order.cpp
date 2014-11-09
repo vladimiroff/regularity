@@ -12,6 +12,16 @@ Order::Order(std::vector<std::string> words, Status status, std::size_t experien
     solution_ = solution;
 }
 
+Order::Order(const Order& o)
+{
+    words_ = o.words_;
+    status_ = o.status_;
+    experience_ = o.experience_;
+    price_ = o.price_;
+    client_ = o.client_;
+    solution_ = o.solution_;
+}
+
 vector<std::string> Order::get_words()
 {
     return words_;
