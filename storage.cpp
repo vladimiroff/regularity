@@ -19,7 +19,7 @@ void Storage::add_material(std::string material)
     materials_mutex_.unlock();
 }
 
-bool Storage::get_marerial(std::string material)
+bool Storage::get_material(std::string material)
 {
     materials_mutex_.lock();
     if(materials_.find(material) != materials_.end() && materials_[material] > 0)

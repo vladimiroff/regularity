@@ -77,7 +77,7 @@ void Factory::add_money(std::size_t additional_money)
 void Factory::buyWork()
 {
     money_ -= PRICE_FOR_WORKER;
-    workers_.push_back(Worker(*storage));
+    workers_.push_back(new Worker(storage_.get()));
 }
 
 std::string Factory::takePart(std::string regexp)
@@ -85,7 +85,7 @@ std::string Factory::takePart(std::string regexp)
     if(storage_->get_material(regexp))
         return regexp;
     else
-        qDebug << "Dont have this element" << std::endl;
+        qDebug() << "Dont have this element";
 }
 
 void Factory::levelUp()
@@ -112,6 +112,27 @@ bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
             return false;
         }
 }
+
+
+bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
+{
+        std::size_t price = store[level_][regexp]->price;
+
+        if (store[level_].find(regexp) != store[level_].end() && money_ >= quantity * price )
+        {
+            for(size_t i = 0; i < quantity; i++)
+            {
+                money_ -= price;
+                storage_->add_material(regexp);
+            }
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+}
+
 
 void Factory::set_money(std::size_t money)
 {

@@ -8,6 +8,14 @@
 #include <QRegExp>
 #include <QString>
 
+#include <iostream>
+#include "storage.h"
+#include "worker.h"
+#include "order.h"
+#include <regex>
+#include <QRegExp>
+#include <QString>
+
 size_t EXP_FOR_ORDER = 10;
 size_t MONEY_FOR_ORDER = 30;
 
