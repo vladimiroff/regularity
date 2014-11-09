@@ -31,7 +31,7 @@ std::vector<std::string> generate_order_words(Client client)
 int main()
 {
     std::map<std::string,int> first;
-    first["\\w"] = 5;
+    first["?"] = 5;
     first["\\d"] = 5;
     first["\\w\\w"] = 5;
     vector<std::string> words = {"bam3", "ham3"};
