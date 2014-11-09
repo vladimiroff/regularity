@@ -54,7 +54,6 @@ void generate_orders(Factory* factory, Client clients[10]) {
         std::shuffle(client_words.begin(), client_words.end(), std::default_random_engine(seed));
 
         for (std::string& word: client_words) {
-            qDebug() << word.c_str();
             order_words.push_back(word);
             if(order_words.size() == 3){
                 break;

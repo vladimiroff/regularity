@@ -14,10 +14,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    ui->storage->setWidgetResizable(true);
     signalMapper = new QSignalMapper();
 
     //signals
-
     std::map<std::string,int> storageItems;
     storage = new Storage(storageItems);
     factory = new Factory(storage, 0, 30, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
@@ -53,7 +53,8 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("\\d");
     storage->add_material("\\d");
     storage->add_material("\\d");
-    storage->add_material("a");
+    storage->add_material("[a-c]");
+    storage->add_material("[d-f]");
 }
 
 MainWindow::~MainWindow()
@@ -111,7 +112,7 @@ void MainWindow::onAddedMaterial(std::string material)
             pb->setObjectName(buttonName);
             connect(pb, SIGNAL(clicked()), signalMapper, SLOT(map()));
             signalMapper->setMapping(pb, buttonName);
-            ui->storageLayout->addWidget(pb, buttons / 8, buttons % 8);
+            ui->storageLayout->addWidget(pb, (buttons - 1) / 4, (buttons - 1) % 4);
         }
     }
 }
