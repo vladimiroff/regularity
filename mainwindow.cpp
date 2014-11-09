@@ -58,6 +58,11 @@ MainWindow::MainWindow(QWidget *parent) :
     storage->add_material("\\d");
     storage->add_material("[a-c]");
     storage->add_material("[d-f]");
+    storage->add_material("[q-t]");
+    storage->add_material("[l-s]");
+    storage->add_material("[x-z]");
+
+    ui->storageLayout->setContentsMargins(1, 1, 1, 1);
 
 }
 
@@ -122,7 +127,9 @@ void MainWindow::onAddedMaterial(std::string material)
             pb->setObjectName(buttonName);
             connect(pb, SIGNAL(clicked()), signalMapper, SLOT(map()));
             signalMapper->setMapping(pb, buttonName);
-            ui->storageLayout->addWidget(pb, (buttons - 1) / 4, (buttons - 1) % 4);
+            QSize buttonSize(50, 50);
+            ui->storageLayout->addWidget(pb, (buttons - 1) / 7, (buttons - 1) % 7);
+            pb->setFixedSize(buttonSize);
         }
     }
 }
