@@ -23,14 +23,14 @@ public:
     virtual ~Factory();
     Factory(Storage *storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
             std::size_t level_experience, size_t current_order_id,
-            std::vector<Worker*> workers, std::map<std::size_t, Order> orders);
+            std::vector<Worker*> workers, std::map<std::size_t, Order*> orders);
 
 
     void add_worker(Worker* new_worker);
     void remove_worker();
     void set_workers(std::vector<Worker*> workers);      //set_workers using vector
-    void add_order(Order new_order);
-    void set_orders(std::map<size_t, Order> orders);          //set_orders using vector
+    void add_order(Order* new_order);
+    void set_orders(std::map<size_t, Order*> orders);          //set_orders using vector
     void remove_order(std::size_t order_id);
     void add_money(std::size_t additional_money);
     void set_money(std::size_t money);                  //set_money
@@ -48,7 +48,7 @@ public:
 
     // get methods
     std::vector<Worker*> get_workers();
-    std::map<size_t, Order> get_orders();
+    std::map<size_t, Order*> get_orders();
     std::size_t get_money();
     float get_rating();
     std::size_t get_level();
@@ -62,13 +62,14 @@ public slots:
     Q_INVOKABLE void buyWork();
     Q_INVOKABLE std::string takePart(std::string regexp);
     Q_INVOKABLE void levelUp();
+    Q_INVOKABLE void workOnOrder(std::size_t order_id);
 
 signals:
     void moneyChanged(std::size_t);
 
 private:
     std::vector<Worker*>            workers_;
-    std::map<std::size_t, Order>    orders_;
+    std::map<std::size_t, Order*>   orders_;
     std::unique_ptr<Storage>        storage_;
     std::size_t                     money_;
     float                           rating_;
