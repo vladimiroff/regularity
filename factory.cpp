@@ -2,6 +2,7 @@
 #include "storage.h"
 #include <QDebug>
 
+size_t PRICE_FOR_WORKER = 30;
 
 Factory::Factory(Storage* storage, std::size_t money, float rating, std::size_t level, std::size_t factory_experience,
                  std::size_t level_experience, std::size_t current_order_id = 0,
@@ -69,6 +70,20 @@ bool Factory::buy_part(Part part, Store store)
 void Factory::add_money(size_t additional_money) {
     money_ += additional_money;
     emit this->moneyChanged(money_);
+}
+
+void Factory::buyWork()
+{
+    money_ -= PRICE_FOR_WORKER;
+    workers_.push_back(Worker(*storage));
+}
+
+std::string Factory::takePart(std::string regexp)
+{
+    if(storage_->get_material(regexp))
+        return regexp;
+    else
+        qDebug << "Dont have this element" << std::endl;
 }
 
 void Factory::set_money(std::size_t money)
