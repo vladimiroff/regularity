@@ -95,6 +95,7 @@ void MainWindow::toggleMainViews() {
 
 void MainWindow::onOrderTaken() {
     ui->answer->setText("^");
+    enableInput();
     int id = factory->take_order();
     if(id != -1) {
         factory->remove_order(id);
@@ -104,8 +105,7 @@ void MainWindow::onOrderTaken() {
             words << QString(word.c_str());
         }
         ui->orderInfo->setText(words.join(", "));
-        enableInput();
-        ui->takeOrder->setEnabled(false);
+        ui->takeOrder->setDisabled(true);
     }
 }
 
@@ -160,7 +160,7 @@ void MainWindow::onCheck() {
         factory->rating_increase(order->get_experience());
     }
     else {
-        ui->answer->setText("You suck at this!");
+        ui->answer->setText("Sad panda :(");
         factory->rating_decrease(order->get_experience());
     }
     disableInput();
@@ -170,13 +170,14 @@ void MainWindow::disableInput() {
     ui->check->setDisabled(true);
     ui->storage->setDisabled(true);
     ui->answer->setDisabled(true);
+    ui->takeOrder->setEnabled(true);
 
 }
 
 void MainWindow::enableInput() {
     ui->check->setEnabled(true);
     ui->storage->setEnabled(true);
-    ui->takeOrder->setEnabled(true);
+    ui->takeOrder->setDisabled(true);
 }
 
 void MainWindow::onRatingChanged(float rating) {
