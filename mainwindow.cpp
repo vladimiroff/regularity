@@ -169,12 +169,12 @@ void MainWindow::onCheck() {
     Order* order = factory->get_order_in_progress();
     std::vector<std::string> words = order->get_words();
     if(factory->validateRegExp(expression, words)) {
-        ui->answer->setText("Happy panda :)");
+        ui->answer->setText("You just made a panda happy :)");
         factory->add_money(order->get_price());
         factory->rating_increase(order->get_experience());
     }
     else {
-        ui->answer->setText("Sad panda :(");
+        ui->answer->setText("You just made a panda sad :(");
         factory->rating_decrease(order->get_experience());
     }
     disableInput();
