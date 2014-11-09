@@ -215,3 +215,22 @@ void Factory::workOnOrder(size_t order_id)
         orders_[order_id]->set_status(IN_PROGRESS);
     }
 }
+
+bool Factory::validateRegExp(std::string expression, std::vector<std::string> words)
+{
+    QString qexpression(expression.c_str());
+    QRegExp r(qexpression);
+    if(!r.isValid())
+    {
+        return false;
+    }
+    for(std::string word : words)
+    {
+        QString qword(word.c_str());
+        if(!r.exactMatch(qword))
+        {
+            return false;
+        }
+    }
+    return true;
+}

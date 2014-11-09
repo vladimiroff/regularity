@@ -62,6 +62,7 @@ public slots:
     Q_INVOKABLE void levelUp();
     Q_INVOKABLE void workOnOrder(std::size_t order_id);
     Q_INVOKABLE bool buyParts(std::string regexp, std::size_t quantity, Store store);
+    Q_INVOKABLE bool validateRegExp(std::string regexp, vector<std::string> words);
 
 signals:
     void newOrder(QString);
