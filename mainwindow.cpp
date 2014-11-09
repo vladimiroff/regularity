@@ -155,7 +155,7 @@ void MainWindow::onCheck() {
     Order* order = factory->get_order_in_progress();
     std::vector<std::string> words = order->get_words();
     if(factory->validateRegExp(expression, words)) {
-        ui->answer->setText("Great job!");
+        ui->answer->setText("Happy panda :)");
         factory->add_money(order->get_price());
         factory->rating_increase(order->get_experience());
     }
