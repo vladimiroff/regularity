@@ -59,6 +59,7 @@ public slots:
     Q_INVOKABLE QString add_money();
 
 signals:
+    void newOrder(QString);
 
 private:
     std::vector<Worker*>        workers_;
