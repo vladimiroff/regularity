@@ -2,13 +2,22 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
+  <property name="enabled">
+   <bool>true</bool>
+  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
     <width>710</width>
-    <height>505</height>
+    <height>500</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Regularity</string>
@@ -25,9 +34,18 @@
      <rect>
       <x>20</x>
       <y>10</y>
-      <width>81</width>
+      <width>111</width>
       <height>31</height>
      </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="segmentStyle">
+     <enum>QLCDNumber::Flat</enum>
     </property>
    </widget>
    <widget class="QProgressBar" name="xp">
@@ -46,9 +64,9 @@
    <widget class="QScrollArea" name="storage">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>310</y>
-      <width>511</width>
+      <x>20</x>
+      <y>300</y>
+      <width>521</width>
       <height>131</height>
      </rect>
     </property>
@@ -63,7 +81,7 @@
       <rect>
        <x>0</x>
        <y>0</y>
-       <width>509</width>
+       <width>519</width>
        <height>129</height>
       </rect>
      </property>
@@ -75,7 +93,7 @@
       <x>10</x>
       <y>50</y>
       <width>691</width>
-      <height>251</height>
+      <height>241</height>
      </rect>
     </property>
     <property name="frameShape">
@@ -90,7 +108,7 @@
        <x>0</x>
        <y>0</y>
        <width>691</width>
-       <height>251</height>
+       <height>241</height>
       </rect>
      </property>
      <property name="frameShape">
@@ -120,10 +138,10 @@
    <widget class="QWidget" name="verticalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>560</x>
-      <y>320</y>
-      <width>131</width>
-      <height>101</height>
+      <x>570</x>
+      <y>340</y>
+      <width>110</width>
+      <height>90</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="orderButtons">
@@ -137,6 +155,11 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Take Order</string>
@@ -162,6 +185,11 @@
          <horstretch>0</horstretch>
          <verstretch>0</verstretch>
         </sizepolicy>
+       </property>
+       <property name="font">
+        <font>
+         <pointsize>11</pointsize>
+        </font>
        </property>
        <property name="text">
         <string>Finish</string>
@@ -197,6 +225,34 @@ color: rgb(255, 244, 248);</string>
      <string>Shop</string>
     </property>
    </widget>
+   <widget class="QLCDNumber" name="orderQueueLength">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>300</y>
+      <width>110</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="frameShadow">
+     <enum>QFrame::Plain</enum>
+    </property>
+    <property name="lineWidth">
+     <number>0</number>
+    </property>
+    <property name="digitCount">
+     <number>6</number>
+    </property>
+    <property name="mode">
+     <enum>QLCDNumber::Bin</enum>
+    </property>
+    <property name="segmentStyle">
+     <enum>QLCDNumber::Flat</enum>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -222,7 +278,14 @@ color: rgb(255, 244, 248);</string>
     <bool>false</bool>
    </attribute>
   </widget>
-  <widget class="QStatusBar" name="statusBar"/>
+  <widget class="QStatusBar" name="statusBar">
+   <property name="statusTip">
+    <string/>
+   </property>
+   <property name="sizeGripEnabled">
+    <bool>true</bool>
+   </property>
+  </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources/>
