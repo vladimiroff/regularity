@@ -93,6 +93,7 @@ void MainWindow::toggleMainViews() {
 }
 
 void MainWindow::onOrderTaken() {
+    ui->answer->setText("^");
     int id = factory->take_order();
     if(id != -1) {
         factory->remove_order(id);
