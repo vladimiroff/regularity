@@ -35,11 +35,8 @@ ApplicationWindow {
 
                 Rectangle {
 
-                    signal moneyChanged(string value);
-                    signal changeMoney(int value);
-
                     Component.onCompleted: {
-                        header.moneyChanged.connect(onMoneyChanged)
+                        console.log("onCompleted")
                     }
 
                     id: header
@@ -61,11 +58,15 @@ ApplicationWindow {
 
                     MouseArea {
                         anchors.fill: parent
-                        onClicked: add_money()
+                        onClicked: {
+                            var v = add_money();
+                            parent.thisWillChange(v);
+                        }
                     }
 
-                    function onMoneyChanged(value) {
-                        headerText.text = value
+                    function thisWillChange(val) {
+                        console.log(val);
+                        headerText.text = val;
                     }
                 }
 

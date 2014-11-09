@@ -4,6 +4,8 @@
 #include "client.h"
 #include <string>
 #include <vector>
+#include <QObject>
+#include <QListWidgetItem>
 
 enum Status {SENT, RECEIVED, DONE, IN_PROGRESS, NOT_ENOUGH_PARTS};
 
@@ -18,7 +20,6 @@ class Order
 public:
     Order(std::vector<std::string> words, Status status, std::size_t experience,
           std::size_t price, Client client, std::string solution);
-
     vector<std::string> get_words();
     Status get_status();
     std::size_t get_experience();

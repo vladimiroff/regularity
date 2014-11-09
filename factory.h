@@ -5,8 +5,8 @@
 #include "order.h"
 #include "storage.h"
 
-#include <QQuickItem>
-#include <QtQuick>
+#include <QObject>
+#include <QString>
 #include <vector>
 #include <map>
 #include <memory>
@@ -14,7 +14,7 @@
 // index of vector is level and map is parts in store for this level
 typedef std::vector<std::map<std::string, Part*>> Store;
 
-class Factory : public QQuickItem
+class Factory : public QObject
 {
     Q_OBJECT
 
@@ -33,19 +33,17 @@ public:
     void add_order(Order* new_order);
     void set_orders(std::map<size_t, Order*> orders);          //set_orders using vector
     void remove_order(std::size_t order_id);
-    void add_money(std::size_t additional_money);
     void set_money(std::size_t money);                  //set_money
     void rating_increase(float additional_rating);
     void rating_decrease(float less_rating);
     void set_rating(float new_rating);                  //set_rating
     void set_current_order_id(std::size_t id);
-    void create_order(std::vector<std::string> words, Client client, std::size_t experience,
+    void create_order(std::vector<std::string> words, Client& client, std::size_t experience,
                       std::size_t price, std::string string);
     void experience_increase(std::size_t additional_experience);
     void level_up();
     bool buy_part(Part part, Store store);
-
-
+    int take_order();
 
     // get methods
     std::vector<Worker*> get_workers();
@@ -56,19 +54,22 @@ public:
     std::size_t get_factory_experience();
     std::size_t get_level_experience();
     std::size_t get_current_id();
+    Order* get_order_in_progress();
 
 
 public slots:
-    Q_INVOKABLE void add_money();
+    Q_INVOKABLE void add_money(std::size_t);
     Q_INVOKABLE void buyWork();
     Q_INVOKABLE std::string takePart(std::string regexp);
     Q_INVOKABLE void levelUp();
-    Q_INVOKABLE bool buyParts(std::string regexp, std::size_t quantity, Store store);
     Q_INVOKABLE void workOnOrder(std::size_t order_id);
+    Q_INVOKABLE bool buyParts(std::string regexp, std::size_t quantity, Store store);
     Q_INVOKABLE bool validateRegExp(std::string regexp, vector<std::string> words);
 
 signals:
-    void moneyChanged(std::size_t);
+    void orderCreated(int);
+    void orderRemoved(int);
+    void moneyChanged(int);
 
 private:
     std::vector<Worker*>            workers_;
@@ -80,6 +81,7 @@ private:
     std::size_t                     factory_experience_;        //this is our xp
     std::size_t                     level_experience_;          //this is xp you need for next level
     std::size_t                     current_order_id_;
+    Order*                          order_in_progress_;
 };
 
 

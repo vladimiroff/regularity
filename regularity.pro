@@ -1,27 +1,22 @@
-TEMPLATE = app
+QT += core gui widgets
 CONFIG += c++11
-
-QT += qml quick widgets
-QT += core
+TARGET = regularity
 
 SOURCES += main.cpp \
     client.cpp \
     order.cpp \
     worker.cpp \
     factory.cpp \
-    storage.cpp
+    storage.cpp \
+    mainwindow.cpp
 
-RESOURCES += qml.qrc
 
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Default rules for deployment.
-include(deployment.pri)
-
-HEADERS += \
+HEADERS +=\
     client.h \
     order.h \
     worker.h \
     factory.h \
-    storage.h
+    storage.h \
+    mainwindow.h
+
+FORMS    += mainwindow.ui

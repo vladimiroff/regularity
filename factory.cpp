@@ -1,5 +1,6 @@
 #include "factory.h"
 #include "storage.h"
+#include <QDebug>
 
 size_t PRICE_FOR_WORKER = 30;
 
@@ -40,12 +41,14 @@ void Factory::add_order(Order* order)
 {
     order->set_status(RECEIVED);
     orders_.insert(std::pair<std::size_t, Order*>(current_order_id_, order));
+    emit orderCreated(current_order_id_);
     current_order_id_++;
 }
 
 void Factory::remove_order(std::size_t order_id)
 {
     orders_.erase(order_id);
+    emit orderRemoved(order_id);
 }
 
 void Factory::set_orders(std::map<std::size_t, Order*> orders)
@@ -67,11 +70,10 @@ bool Factory::buy_part(Part part, Store store)
     }
 }
 
-void Factory::add_money()
+void Factory::add_money(std::size_t additional_money)
 {
-    money_ += 100;
-    qDebug() << "money added";
-    emit this->moneyChanged(money_);
+    money_ += additional_money;
+    emit moneyChanged(money_);
 }
 
 void Factory::buyWork()
@@ -93,7 +95,6 @@ void Factory::levelUp()
     level_up();
 }
 
-
 bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
 {
         std::size_t price = store[level_][regexp]->price;
@@ -112,7 +113,6 @@ bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
             return false;
         }
 }
-
 
 void Factory::set_money(std::size_t money)
 {
@@ -150,11 +150,11 @@ void Factory::level_up()
     level_experience_ *= 2;
 }
 
-void Factory::create_order(std::vector<std::string> words, Client client, std::size_t price, std::size_t experience,
+void Factory::create_order(std::vector<std::string> words, Client& client, std::size_t price, std::size_t experience,
                            std::string solution = "")
 {
-    Order new_order(words, SENT, price, experience, client, solution);
-    add_order(&new_order);
+    Order* new_order = new Order(words, SENT, price, experience, client, solution);
+    add_order(new_order);
 }
 
 Factory::~Factory()
@@ -234,4 +234,14 @@ bool Factory::validateRegExp(std::string expression, std::vector<std::string> wo
         }
     }
     return true;
+}
+
+Order* Factory::get_order_in_progress() {
+    return order_in_progress_;
+}
+
+int Factory::take_order() {
+    Order* order = orders_.begin()->second;
+    order_in_progress_ = order;
+    return orders_.begin()->first;
 }

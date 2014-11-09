@@ -33,12 +33,19 @@ Rectangle {
             }
         }
         Rectangle {
+            objectName: "rect"
             width: 20
             Layout.alignment: Qt.AlignCenter
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.preferredHeight: task_view.height - 20
             ListModel {
+                signal trigger(string name)
+                onTrigger: {
+                    console.log(name)
+                }
+
+                objectName: "Orders"
                 id: task_list
                 ListElement {
                     name: "Baba"
