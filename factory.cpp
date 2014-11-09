@@ -119,21 +119,28 @@ bool Factory::buyParts(std::string regexp, std::size_t quantity, Store store)
 void Factory::set_money(std::size_t money)
 {
     money_ = money;
+    emit moneyChanged(money_);
 }
 
 void Factory::rating_increase(float increase)
 {
     rating_ += increase;
+    emit ratingChanged(rating_);
 }
 
 void Factory::rating_decrease(float decrease)
 {
-    rating_ += decrease;
+    rating_ = rating_ - decrease;
+    if (rating_ < 0) {
+        rating_ = 0;
+    }
+    emit ratingChanged(rating_);
 }
 
 void Factory::set_rating(float new_rating)
 {
     rating_ = new_rating;
+    emit ratingChanged(rating_);
 }
 
 void Factory::set_current_order_id(size_t id)

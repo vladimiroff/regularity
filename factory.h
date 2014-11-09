@@ -70,6 +70,7 @@ signals:
     void orderCreated(int);
     void orderRemoved(int);
     void moneyChanged(int);
+    void ratingChanged(float);
 
 private:
     std::vector<Worker*>            workers_;

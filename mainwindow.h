@@ -38,6 +38,7 @@ private slots:
     void onOrderCreated(int);
     void onOrderTaken();
     void onCheck();
+    void onRatingChanged(float);
 };
 
 #endif // MAINWINDOW_H

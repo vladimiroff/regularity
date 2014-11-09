@@ -21,7 +21,7 @@ MainWindow::MainWindow(QWidget *parent) :
     //signals
     std::map<std::string,int> storageItems;
     storage = new Storage(storageItems);
-    factory = new Factory(storage, 0, 30, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
+    factory = new Factory(storage, 0, 0, 1, 20, 10, 0,  std::vector<Worker*>(), std::map<std::size_t, Order*>());
     factory->add_money(100);
 
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
@@ -33,6 +33,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->toggleMainViewButton, SIGNAL(clicked()), this, SLOT(toggleMainViews()));
     connect(signalMapper, SIGNAL(mapped(QString)), this, SLOT(onTookMaterial(QString)));
     connect(ui->check, SIGNAL(clicked()), this, SLOT(onCheck()));
+    connect(factory, SIGNAL(ratingChanged(float)), this, SLOT(onRatingChanged(float)));
 
     disableInput();
 
@@ -105,6 +106,7 @@ void MainWindow::onOrderTaken() {
         }
         ui->orderInfo->setText(words.join(", "));
         enableInput();
+        ui->takeOrder->setEnabled(false);
     }
 }
 
@@ -175,4 +177,9 @@ void MainWindow::disableInput() {
 void MainWindow::enableInput() {
     ui->check->setEnabled(true);
     ui->storage->setEnabled(true);
+    ui->takeOrder->setEnabled(true);
+}
+
+void MainWindow::onRatingChanged(float rating) {
+    ui->xp->setValue(rating);
 }

@@ -1,4 +1,5 @@
 #include "order.h"
+#include <QDebug>
 
 Order::Order(std::vector<std::string> words, Status status, std::size_t experience, std::size_t price, Client client,
              std::string solution = "")
@@ -24,6 +25,7 @@ Status Order::get_status()
 
 std::size_t Order::get_experience()
 {
+    qDebug() << experience_;
     return experience_;
 }
 

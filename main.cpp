@@ -32,7 +32,7 @@ size_t generate_order_price(Client client)
 }
 size_t generate_order_experiance(Client client)
 {
-    return client.get_level() * EXP_FOR_ORDER;
+    return (client.get_level() + 1) * EXP_FOR_ORDER;
 }
 //need to correct func because we need to return words from file for client level
 std::vector<std::string> generate_order_words(Client client)
