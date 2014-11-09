@@ -19,6 +19,7 @@
 #include <algorithm>
 #include <thread>
 #include <unistd.h>
+#include <random>
 
 size_t EXP_FOR_ORDER = 10;
 size_t MONEY_FOR_ORDER = 30;
@@ -43,6 +44,7 @@ void generate_orders(Factory* factory, Client clients[10]) {
         int price = generate_order_price(clients[n]);
         int xp = generate_order_experiance(clients[n]);
         std::vector<std::string> client_words = clients[n].get_words();
+        std::srand(rand() % 20);
         std::random_shuffle(client_words.begin(), client_words.end());
         std::vector<std::string> order_words;
         order_words.push_back(clients[n].get_words()[0]);
@@ -57,7 +59,7 @@ int main(int argc, char* argv[])
 {
     Client clients[10] = {
             Client(100, {"aaa", "bbb", "ggg"}, 0),
-            Client(100, {"aaa", "bbb", "ggg"}, 1),
+            Client(100, {"fff", "bbb", "ggg"}, 1),
             Client(100, {"aaa", "bbb", "ggg"}, 2),
             Client(100, {"aaa", "bbb", "ggg"}, 3),
             Client(100, {"aaa", "bbb", "ggg"}, 4),

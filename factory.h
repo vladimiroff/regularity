@@ -42,7 +42,7 @@ public:
     void experience_increase(std::size_t additional_experience);
     void level_up();
     bool buy_part(Part part, Store store);
-
+    int take_order();
 
     // get methods
     std::vector<Worker*> get_workers();
@@ -53,6 +53,7 @@ public:
     std::size_t get_factory_experience();
     std::size_t get_level_experience();
     std::size_t get_current_id();
+    Order* get_order_in_progress();
 
 
 public slots:
@@ -79,6 +80,7 @@ private:
     std::size_t                     factory_experience_;        //this is our xp
     std::size_t                     level_experience_;          //this is xp you need for next level
     std::size_t                     current_order_id_;
+    Order*                          order_in_progress_;
 };
 
 

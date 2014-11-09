@@ -153,8 +153,8 @@ void Factory::level_up()
 void Factory::create_order(std::vector<std::string> words, Client& client, std::size_t price, std::size_t experience,
                            std::string solution = "")
 {
-    Order new_order(words, SENT, price, experience, client, solution);
-    add_order(&new_order);
+    Order* new_order = new Order(words, SENT, price, experience, client, solution);
+    add_order(new_order);
 }
 
 Factory::~Factory()
@@ -234,4 +234,14 @@ bool Factory::validateRegExp(std::string expression, std::vector<std::string> wo
         }
     }
     return true;
+}
+
+Order* Factory::get_order_in_progress() {
+    return order_in_progress_;
+}
+
+int Factory::take_order() {
+    Order* order = orders_.begin()->second;
+    order_in_progress_ = order;
+    return orders_.begin()->first;
 }

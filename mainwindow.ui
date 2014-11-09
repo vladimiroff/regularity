@@ -127,6 +127,38 @@
       <property name="styleSheet">
        <string notr="true">background-color: rgb(52, 255, 75);</string>
       </property>
+      <widget class="QLabel" name="orderInfo">
+       <property name="geometry">
+        <rect>
+         <x>490</x>
+         <y>20</y>
+         <width>181</width>
+         <height>71</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="answer">
+       <property name="geometry">
+        <rect>
+         <x>100</x>
+         <y>120</y>
+         <width>491</width>
+         <height>81</height>
+        </rect>
+       </property>
+       <property name="styleSheet">
+        <string notr="true">font: 36pt &quot;Monospace&quot;;</string>
+       </property>
+       <property name="text">
+        <string>word</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
      </widget>
      <widget class="QWidget" name="shop">
       <property name="autoFillBackground">
@@ -285,7 +317,7 @@ color: rgb(255, 244, 248);</string>
      <x>0</x>
      <y>0</y>
      <width>710</width>
-     <height>22</height>
+     <height>19</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuHere">

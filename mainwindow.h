@@ -26,6 +26,7 @@ private slots:
     void onMoneyChanged(int);
     void onOrderRemoved(int);
     void onOrderCreated(int);
+    void onOrderTaken();
 };
 
 #endif // MAINWINDOW_H

@@ -4,6 +4,7 @@
 #include "factory.h"
 #include <map>
 #include <QGridLayout>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -29,6 +30,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(factory, SIGNAL(moneyChanged(int)), this, SLOT(onMoneyChanged(int)));
     connect(factory, SIGNAL(orderCreated(int)), this, SLOT(onOrderCreated(int)));
     connect(factory, SIGNAL(orderRemoved(int)), this, SLOT(onOrderRemoved(int)));
+    connect(ui->takeOrder, SIGNAL(clicked()), this, SLOT(onOrderTaken()));
 
     factory->add_money(100);
 }
@@ -65,4 +67,11 @@ void MainWindow::toggleMainViews() {
     }
 }
 
+void MainWindow::onOrderTaken() {
+    int id = factory->take_order();
+    factory->remove_order(id);
+    Order* order = factory->get_order_in_progress();
+    QString text(order->get_words()[0].c_str());
+    ui->orderInfo->setText(text);
+}
 
