@@ -12,7 +12,7 @@
 #include <memory>
 
 // index of vector is level and map is parts in store for this level
-typedef std::vector<std::map<std::string, Part>> Store;
+typedef std::vector<std::map<std::string, Part*>> Store;
 
 class Factory : public QObject
 {
@@ -61,6 +61,7 @@ public slots:
     Q_INVOKABLE std::string takePart(std::string regexp);
     Q_INVOKABLE void levelUp();
     Q_INVOKABLE void workOnOrder(std::size_t order_id);
+    Q_INVOKABLE bool buyParts(std::string regexp, std::size_t quantity, Store store);
 
 signals:
     void newOrder(QString);
